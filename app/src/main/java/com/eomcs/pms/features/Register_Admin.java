@@ -1,14 +1,15 @@
 package com.eomcs.pms.features;
 import java.sql.Date;
 import java.util.Random;
+import java.util.Scanner;
 import com.eomcs.util.Prompt;
 
 public class Register_Admin {
 
   static Random random = new Random();
+  static Scanner scanner = new Scanner(System.in);
 
-
-  static class Member {
+  public static class Member {
 
 
     String id;
@@ -59,6 +60,22 @@ public class Register_Admin {
   public static void add3() {
     // 회원 목록과 남은 일수 
     System.out.println("[관리자 모드]"); 
+
+    // 관리자 로그인 하여 회원 삭제
+    System.out.print("id: ");
+    String ID = scanner.nextLine();
+    System.out.print("password: ");
+    String PW = scanner.nextLine();
+    String id = "hi";
+    String pass = "1234";
+
+    if(ID.equals(id) && PW.equals(pass)){
+      System.out.println("로그인 성공 ");
+    }else {
+      System.out.println("로그인 실패");
+    }
+
+
     for (int i = 0; i < size; i++) {
       Member m = members[i];
 
@@ -79,8 +96,6 @@ public class Register_Admin {
           ,  m.id, m.number, m.name, m.phone, m.adress, m.birth , m.job, m.gender 
           ,m.email, m.now, status1 );
     }
-    // 기간이 만료된 회원을 삭제하는 기능 만들기
-
   }
 
 }
