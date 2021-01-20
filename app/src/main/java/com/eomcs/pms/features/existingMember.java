@@ -1,13 +1,14 @@
-package com.eomcs.pms;
+package com.eomcs.pms.features;
 
 import java.util.Scanner;
 
 public class existingMember {
 
   static Scanner scanner = new Scanner(System.in);
-  static void add2 () {
+ public static void add2 () {
     System.out.println("[기존 회원]");
-    System.out.println("회원 번호 입력: ");
+   // 입력받은 id로 로그인 기능을 추가해보자
+    System.out.println("id: ");
     System.out.printf("> "); 
     System.out.println();
 

@@ -1,5 +1,8 @@
 package com.eomcs.pms;
 
+import com.eomcs.pms.features.Register_Admin;
+import com.eomcs.pms.features.existingMember;
+import com.eomcs.util.Prompt;
 
 public class myproject1 {
   /*헬스장 회원 관리 
@@ -12,8 +15,10 @@ public class myproject1 {
 아이디 회원 번호 이름 전화 주소 생일 직업 성별 이메일 등록 기간 만료기간 
 [나중에 추가해줄것]
 기존 회원: pt 회원이면 몇회 남았고 예약 시간 정하기 , 회원 번호를 입력하여 정보 검색       
-관리자 모드: 만료된 회원 삭제하기 , 회원 기간 늘리기 , 
+관리자 모드: 만료된 회원 삭제하기 , 회원 기간 늘리기  
  번호 중복없이 랜덤지정 해주기 
+ 회원 번호를 입력하면 출석체크 완료한거 뜨기 
+ 3. pt 신청하기 4. 관리자 모드 5. 종료 만들기 
    * 
    */
 
