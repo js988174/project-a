@@ -5,6 +5,8 @@ import com.eomcs.pms.features.existingMember;
 import com.eomcs.util.Prompt;
 
 public class myproject1 {
+
+
   /*헬스장 회원 관리 
 [ 회원 가입]
 아이디 회원 번호 이름 전화 주소 생일 직업 성별 이메일 등록 기간 만료기간 
@@ -18,7 +20,7 @@ public class myproject1 {
 관리자 모드: 만료된 회원 삭제하기 , 회원 기간 늘리기  
  번호 중복없이 랜덤지정 해주기 
  회원 번호를 입력하면 출석체크 완료한거 뜨기 
- 3. pt 신청하기 4. 관리자 모드 5. 종료 만들기 
+ 3. pt 신청하기 4. 관리자 모드 5. 종료 
    * 
    */
 
@@ -29,7 +31,7 @@ public class myproject1 {
       while(true) {
         System.out.println("1. 신규 회원 2. 기존 회원 3. 관리자 모드 4. 종료 ");
 
-        String command = Prompt.inputString("번호를 선택해주세요: ");
+        String command =  com.eomcs.util.Prompt.inputString("번호를 선택해주세요: ");
 
 
         switch (command) {
@@ -58,4 +60,3 @@ public class myproject1 {
     Prompt.close();
   }
 }
-

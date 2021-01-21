@@ -12,6 +12,7 @@ public class Register_Admin {
   public static class Member {
 
 
+    public static final Object ID = null;
     String id;
     int number;
     String name;
@@ -66,7 +67,7 @@ public class Register_Admin {
     String ID = scanner.nextLine();
     System.out.print("password: ");
     String PW = scanner.nextLine();
-    String id = "hi";
+    String id = "admin";
     String pass = "1234";
 
     if(ID.equals(id) && PW.equals(pass)){
@@ -97,6 +98,13 @@ public class Register_Admin {
           ,m.email, m.now, status1 );
     }
   }
-
+  public static boolean exist(String id) {
+    for (int i = 0; i < size; i++) {
+      if (id.equals(members[i].id)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
