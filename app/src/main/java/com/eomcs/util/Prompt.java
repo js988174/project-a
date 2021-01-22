@@ -13,7 +13,7 @@ public class Prompt {
   public static int inputInt(String title) {
     return Integer.parseInt(inputString(title));
   }
- public static Date inputDate(String title) {
+  public static Date inputDate(String title) {
     return Date.valueOf(inputString(title));
   }
   public static void close() {

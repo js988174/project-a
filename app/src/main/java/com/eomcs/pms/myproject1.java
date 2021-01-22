@@ -1,5 +1,6 @@
 package com.eomcs.pms;
 
+import com.eomcs.pms.features.Board_a;
 import com.eomcs.pms.features.Register_Admin;
 import com.eomcs.pms.features.existingMember;
 import com.eomcs.util.Prompt;
@@ -8,43 +9,69 @@ public class myproject1 {
 
 
   /*헬스장 회원 관리 
-[ 회원 가입]
-아이디 회원 번호 이름 전화 주소 생일 직업 성별 이메일 등록 기간 만료기간 
+
 [기존 회원]
 몇일 남았는지 보기
-[관리자 모드]
 [회원 조회]
 아이디 회원 번호 이름 전화 주소 생일 직업 성별 이메일 등록 기간 만료기간 
 [나중에 추가해줄것]
-기존 회원: pt 회원이면 몇회 남았고 예약 시간 정하기 , 회원 번호를 입력하여 정보 검색       
+기존 회원: pt 회원이면 몇회 남았고 예약 시간 정하기 , 회원 아이디 검색해서 정보 보기       
 관리자 모드: 만료된 회원 삭제하기 , 회원 기간 늘리기  
  번호 중복없이 랜덤지정 해주기 
  회원 번호를 입력하면 출석체크 완료한거 뜨기 
- 3. pt 신청하기 4. 관리자 모드 5. 종료 
+
    * 
    */
 
 
   public static void main(String[] args) {
 
+    Board_a boardList1 = new Board_a();
+    Board_a boardList2 = new Board_a();
+    Board_a boardList3 = new Board_a();
+
+    existingMember Elist = new existingMember();
+    Register_Admin Rlist = new Register_Admin();
+
     loop:
       while(true) {
-        System.out.println("1. 신규 회원 2. 기존 회원 3. 관리자 모드 4. 종료 ");
-
+        System.out.println("[1] 신규 회원 [2] 기존 회원 ");
+        System.out.println("[3.1 ~ 3.3] 글 작성 ");
+        System.out.println("[4.1 ~ 4.3] 글 목록");
+        System.out.println("[5] 관리자 모드 ");
+        System.out.println("[6] 종료 ");
         String command =  com.eomcs.util.Prompt.inputString("번호를 선택해주세요: ");
 
 
         switch (command) {
           case "1" :   
-            Register_Admin.add1();
+            Rlist.add1();
             break;
           case "2" :  
-            existingMember.add2();
+            Elist.add2(Rlist);
             break;
-          case "3" :
-            Register_Admin.add3();
+          case "3.1" :
+            boardList1.add3(boardList1);
             break;
-          case "4" :
+          case "3.2" :
+            boardList2.add3(boardList2);
+            break;
+          case "3.3" :
+            boardList3.add3(boardList3);
+            break;
+          case "4.1" :
+            boardList1.list();
+            break;
+          case "4.2" :
+            boardList2.list();
+            break;
+          case "4.3" :
+            boardList3.list();
+            break;
+          case "5" :
+            Rlist.add4();
+            break;
+          case "6" :
             System.out.println("시스템을 종료합니다. ");
             break loop;
 

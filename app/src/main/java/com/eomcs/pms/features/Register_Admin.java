@@ -1,7 +1,7 @@
 package com.eomcs.pms.features;
-import java.sql.Date;
 import java.util.Random;
 import java.util.Scanner;
+import com.eomcs.pms.domain.Register;
 import com.eomcs.util.Prompt;
 
 public class Register_Admin {
@@ -9,29 +9,14 @@ public class Register_Admin {
   static Random random = new Random();
   static Scanner scanner = new Scanner(System.in);
 
-  public static class Member {
 
-
-    public static final Object ID = null;
-    String id;
-    int number;
-    String name;
-    String phone;
-    String adress;
-    String birth;
-    String job;
-    String gender;
-    String email;
-    Date now;
-    int status;
-
-  }
   static final int MEMBER_NUMBER = 1000;
-  static Member[] members = new Member[MEMBER_NUMBER];
-  static int size = 0;
 
-  public static void add1() {
-    Member m = new Member();
+  Register[] members = new Register[MEMBER_NUMBER];
+  int size = 0;
+
+  public void add1() {
+    Register m = new Register();
 
     System.out.println();
     System.out.println("[회원 등록]");
@@ -55,10 +40,10 @@ public class Register_Admin {
     m.now = new java.sql.Date(System.currentTimeMillis());
     m.status = Prompt.inputInt("등록기간:\n0: 3개월\n1: 6개월\n2: 12개월\n>");
 
-    members[size++] = m;
+    this.members[this.size++] = m;
   }
 
-  public static void add3() {
+  public void add4() {
     // 회원 목록과 남은 일수 
     System.out.println("[관리자 모드]"); 
 
@@ -72,35 +57,37 @@ public class Register_Admin {
 
     if(ID.equals(id) && PW.equals(pass)){
       System.out.println("로그인 성공 ");
+
+      for (int i = 0; i < size; i++) {
+        Register m = this.members[i];
+
+        String status1 = null;
+        switch (m.status) {
+          case 1:
+            status1 = "3개월 신청";
+            break;
+          case 2:
+            status1 = "6개월 신청";
+            break;
+          default :
+            status1 = "12개월 신청";
+            break;
+        }
+        System.out.printf("회원 id: %s ,회원 번호: %d ,회원 이름: %s ,전화 번호: %s ,"
+            + " 주소: %s ,생년 월일: %s  ,직업: %s ,성별: %s ,이메일: %s ,등록 날짜: %s ,등록 기간: %s\n"
+            ,  m.id, m.number, m.name, m.phone, m.adress, m.birth , m.job, m.gender 
+            ,m.email, m.now, status1 );
+      }
     }else {
       System.out.println("로그인 실패");
     }
 
 
-    for (int i = 0; i < size; i++) {
-      Member m = members[i];
 
-      String status1 = null;
-      switch (m.status) {
-        case 1:
-          status1 = "3개월 신청";
-          break;
-        case 2:
-          status1 = "6개월 신청";
-          break;
-        default :
-          status1 = "12개월 신청";
-          break;
-      }
-      System.out.printf("회원 id: %s ,회원 번호: %d ,회원 이름: %s ,전화 번호: %s ,"
-          + " 주소: %s ,생년 월일: %s  ,직업: %s ,성별: %s ,이메일: %s ,등록 날짜: %s ,등록 기간: %s\n"
-          ,  m.id, m.number, m.name, m.phone, m.adress, m.birth , m.job, m.gender 
-          ,m.email, m.now, status1 );
-    }
   }
-  public static boolean exist(String id) {
-    for (int i = 0; i < size; i++) {
-      if (id.equals(members[i].id)) {
+  public boolean exist(String id) {
+    for (int i = 0; i < this.size; i++) {
+      if (id.equals(this.members[i].id)) {
         return true;
       }
     }

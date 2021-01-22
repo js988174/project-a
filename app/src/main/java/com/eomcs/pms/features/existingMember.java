@@ -1,37 +1,36 @@
 package com.eomcs.pms.features;
 
+import com.eomcs.pms.domain.existing;
 import com.eomcs.util.Prompt;
 
 public class existingMember {
 
-  static class Emember {   
-    String ID1;
-    int height;
-    int weight;
-    String bmicalculation;
-  }
   static final int MEMBER_SIZE= 1000;
-  static Emember[] members = new Emember[MEMBER_SIZE];
-  static int size = 0;
+
+  existing[] members = new existing[MEMBER_SIZE];
+  int size = 0;
 
 
 
-  public static void add2 () {
+  public void add2 (Register_Admin memberList) {
     System.out.println("[기존 회원]");
 
-    Emember m = new Emember();
+    existing m = new existing();
     while (true) {
       String id = Prompt.inputString("ID: (취소: 빈 문자열)");
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (Register_Admin.exist(id)) {   
+      } else if (memberList.exist(id)) {   
         m.ID1 = id;
+        System.out.println("[]회원님 반갑습니다.");
         break;
       } else {
         System.out.println("등록된 회원이 아닙니다.");
       }
     }
+
+    System.out.println();
     String bmicalculation = Prompt.inputString("bmi지수를 계산하시겠습니까?[yes/no]");
     if(bmicalculation.equalsIgnoreCase("yes")) {
 
@@ -44,12 +43,12 @@ public class existingMember {
     }
 
 
-    members[size++] = m;
+    this.members[this.size++] = m;
   }
-  public static void list() {
+  public void list() {
     System.out.println("[회원 정보]");
-    for (int i = 0; i < size; i++) {
-      Emember m = members[i];
+    for (int i = 0; i < this.size; i++) {
+      existing m = this.members[i];
       System.out.printf("%d\n" ,m.ID1);
     }
   }
