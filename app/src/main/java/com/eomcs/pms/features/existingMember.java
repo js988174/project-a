@@ -29,18 +29,26 @@ public class existingMember {
         System.out.println("등록된 회원이 아닙니다.");
       }
     }
+    while (true) {
+      System.out.println("[1] pt 신청하기 [2] bmi 계산하기");
+      String command = Prompt.inputString("번호를 선택해주세요: ");
+      if (command == 1) {
+        System.out.println("1회 5만원,10회 45만원 ,15회 ");
 
-    System.out.println();
-    String bmicalculation = Prompt.inputString("bmi지수를 계산하시겠습니까?[yes/no]");
-    if(bmicalculation.equalsIgnoreCase("yes")) {
+      } else if (command ==2) {
+        String bmicalculation = Prompt.inputString("bmi지수를 계산하시겠습니까?[yes/no]");
+        if(bmicalculation.equalsIgnoreCase("yes")) {
 
-      m.height = Prompt.inputInt("몸무게: ");    
-      m.weight = Prompt.inputInt("키: ");
-      double bmi = m.weight/m.height/m.height ;
-      System.out.printf("bmi 지수: %.2f\n" ,bmi);
-    }else {
-      System.out.println("메뉴로 돌아갑니다.");
+          m.height = Prompt.inputInt("몸무게: ");    
+          m.weight = Prompt.inputInt("키: ");
+          double bmi = m.weight/m.height/m.height ;
+          System.out.printf("bmi 지수: %.2f\n" ,bmi);
+        }else {
+          System.out.println("메뉴로 돌아갑니다.");
+        }
+      }
     }
+
 
 
     this.members[this.size++] = m;
