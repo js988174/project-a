@@ -5,4 +5,5 @@ public class existing {
   public int height;
   public int weight;
   public String bmicalculation;
+  public int status;
 }
