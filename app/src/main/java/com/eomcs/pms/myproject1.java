@@ -15,7 +15,8 @@ public class myproject1 {
 [회원 조회]
 아이디 회원 번호 이름 전화 주소 생일 직업 성별 이메일 등록 기간 만료기간 
 [나중에 추가해줄것]
-기존 회원: pt 회원이면 몇회 남았고 예약 시간 정하기 , 회원 아이디 검색해서 정보 보기       
+기존 회원: 회원 아이디 검색하면 [이름 반갑습니다] 출력       
+pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기 
 관리자 모드: 만료된 회원 삭제하기 , 회원 기간 늘리기  
  번호 중복없이 랜덤지정 해주기 
  회원 번호를 입력하면 출석체크 완료한거 뜨기 
@@ -30,8 +31,10 @@ public class myproject1 {
     Board_a boardList2 = new Board_a();
     Board_a boardList3 = new Board_a();
 
-    existingMember Elist = new existingMember();
-    Register_Admin Rlist = new Register_Admin();
+    existingMember Elist = new existingMember();  
+    Register_Admin memberList = new Register_Admin();
+
+    Elist.memberList = memberList;
 
     loop:
       while(true) {
@@ -45,10 +48,10 @@ public class myproject1 {
 
         switch (command) {
           case "1" :   
-            Rlist.add1();
+            memberList.add1();
             break;
           case "2" :  
-            Elist.add2(Rlist);
+            Elist.add2();
             break;
           case "3.1" :
             boardList1.add3(boardList1);
@@ -69,7 +72,7 @@ public class myproject1 {
             boardList3.list();
             break;
           case "5" :
-            Rlist.add4();
+            memberList.add4();
             break;
           case "6" :
             System.out.println("시스템을 종료합니다. ");

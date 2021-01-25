@@ -10,9 +10,11 @@ public class existingMember {
   existing[] members = new existing[MEMBER_SIZE];
   int size = 0;
 
+  public Register_Admin memberList;
 
 
-  public void add2 (Register_Admin memberList) {
+
+  public void add2 () {
     System.out.println("[기존 회원]");
 
     existing m = new existing();
@@ -21,9 +23,11 @@ public class existingMember {
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (memberList.exist(id)) {   
-        m.ID1 = id;
-        System.out.println("[]회원님 반갑습니다.");
+      } else if (this.memberList.exist(id)) {   
+        m.ID1 = id;    
+        String name;
+        System.out.println("[]회원님 반갑습니다.");  
+
         break;
       } else {
         System.out.println("등록된 회원이 아닙니다.");
