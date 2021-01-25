@@ -37,7 +37,7 @@ public class existingMember {
         switch (command1) {
           case "1":
             m.status = Prompt.inputInt("\n1: 1회 [5만원] \n2: 10회 [45만원] \n3: 15회 [68만원]\n ");
-            this.members[this.size++] = m;
+
 
             for (int i = 0; i < size; i++) {
               existing m1 = this.members[i];
@@ -72,6 +72,7 @@ public class existingMember {
           default : 
             System.out.println("실행할 수 없는 명령입니다.");
         }    
+        this.members[this.size++] = m;
       }
   }
   public void list() {

@@ -21,9 +21,10 @@ public class Board_a {
     b.writer = Prompt.inputString("작성자: ");
     b.now = new Date(System.currentTimeMillis());
     b.viewCount = 0;
+    System.out.println("[글을 등록했습니다.]");
     this.boards[this.size++] = b;
 
-    System.out.println("[글을 등록했습니다.]");
+
   }
   public void list() {
     System.out.println("[게시글 목록]");
