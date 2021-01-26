@@ -12,7 +12,9 @@ public class existingMember {
 
   public Register_Admin memberList;
 
-
+  public existingMember(Register_Admin register) {
+    this.memberList = register;
+  }
 
   public void add2 () {
     System.out.println("[기존 회원]");
@@ -25,7 +27,7 @@ public class existingMember {
         return;
       } else if (this.memberList.exist(id)) {   
         m.ID1 = id;    
-        String name;
+
         System.out.println("[]회원님 반갑습니다.");  
 
         break;
@@ -40,7 +42,7 @@ public class existingMember {
 
         switch (command1) {
           case "1":
-            m.status = Prompt.inputInt("\n1: 1회 [5만원] \n2: 10회 [45만원] \n3: 15회 [68만원]\n ");
+            m.status = Prompt.inputInt("\n0: 1회 [5만원]\n1: 10회 [45만원]\n2: 15회 [68만원]\n ");
 
 
             for (int i = 0; i < size; i++) {
@@ -49,13 +51,13 @@ public class existingMember {
               String status1 = null;
               switch (m1.status) {
                 case 1:
-                  status1 = "1회 [5만원]";
-                  break;
-                case 2:
                   status1 = "10회 [45만원]";
                   break;
-                default :
+                case 2:
                   status1 = "15회 [68만원]";
+                  break;
+                default :
+                  status1 = "1회 [5만원]";
                   break;
               }
               System.out.printf("pt 신청번호: %s\n", status1);

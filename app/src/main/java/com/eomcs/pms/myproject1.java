@@ -31,10 +31,11 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
     Board_a boardList2 = new Board_a();
     Board_a boardList3 = new Board_a();
 
-    existingMember Elist = new existingMember();  
     Register_Admin memberList = new Register_Admin();
+    existingMember Elist = new existingMember(memberList);  
 
-    Elist.memberList = memberList;
+
+
 
     loop:
       while(true) {

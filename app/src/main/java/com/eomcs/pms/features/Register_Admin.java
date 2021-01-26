@@ -64,13 +64,13 @@ public class Register_Admin {
         String status1 = null;
         switch (m.status) {
           case 1:
-            status1 = "3개월 신청";
-            break;
-          case 2:
             status1 = "6개월 신청";
             break;
-          default :
+          case 2:
             status1 = "12개월 신청";
+            break;
+          default :
+            status1 = "3개월 신청";
             break;
         }
         System.out.printf("회원 id: %s ,회원 번호: %d ,회원 이름: %s ,전화 번호: %s ,"
