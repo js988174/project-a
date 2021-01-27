@@ -1,9 +1,9 @@
-package com.eomcs.pms;
+package com.kim.pms;
 
-import com.eomcs.pms.features.Board_a;
-import com.eomcs.pms.features.Register_Admin;
-import com.eomcs.pms.features.ExistingMember;
-import com.eomcs.util.Prompt;
+import com.kim.pms.features.Board_a;
+import com.kim.pms.features.Register_Admin;
+import com.kim.pms.features.ExistingMember;
+import com.kim.util.Prompt;
 
 public class MyProject1 {
 
@@ -44,7 +44,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
         System.out.println("[4.1 ~ 4.3] 글 목록");
         System.out.println("[5] 관리자 모드 ");
         System.out.println("[6] 종료 ");
-        String command =  com.eomcs.util.Prompt.inputString("번호를 선택해주세요: ");
+        String command =  com.kim.util.Prompt.inputString("번호를 선택해주세요: ");
 
 
         switch (command) {

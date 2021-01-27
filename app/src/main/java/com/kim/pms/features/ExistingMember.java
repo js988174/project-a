@@ -1,7 +1,7 @@
-package com.eomcs.pms.features;
+package com.kim.pms.features;
 
-import com.eomcs.pms.domain.Existing;
-import com.eomcs.util.Prompt;
+import com.kim.pms.domain.Existing;
+import com.kim.util.Prompt;
 
 public class ExistingMember {
 

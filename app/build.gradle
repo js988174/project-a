@@ -35,5 +35,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.eomcs.pms.App'
+    mainClass = 'com.kim.pms.App'
 }

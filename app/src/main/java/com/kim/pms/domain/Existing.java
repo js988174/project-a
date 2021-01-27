@@ -1,4 +1,4 @@
-package com.eomcs.pms.domain;
+package com.kim.pms.domain;
 
 public class Existing {
   public String ID1;

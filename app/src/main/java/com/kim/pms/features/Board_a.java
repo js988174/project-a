@@ -1,9 +1,9 @@
-package com.eomcs.pms.features;
+package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Board;
-import com.eomcs.util.Prompt;
+import com.kim.pms.domain.Board;
+import com.kim.util.Prompt;
 
 public class Board_a {
 

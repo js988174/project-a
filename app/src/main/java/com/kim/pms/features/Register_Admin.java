@@ -1,8 +1,8 @@
-package com.eomcs.pms.features;
+package com.kim.pms.features;
 import java.util.Random;
 import java.util.Scanner;
-import com.eomcs.pms.domain.Register;
-import com.eomcs.util.Prompt;
+import com.kim.pms.domain.Register;
+import com.kim.util.Prompt;
 
 public class Register_Admin {
 
