@@ -1,6 +1,6 @@
 package com.kim.pms;
 
-import com.kim.pms.features.Board_a;
+import com.kim.pms.features.Check;
 import com.kim.pms.features.ExistingMember;
 import com.kim.pms.features.Register_Admin;
 import com.kim.util.Prompt;
@@ -27,13 +27,10 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
   public static void main(String[] args) {
 
-    Board_a boardList1 = new Board_a();
-    Board_a boardList2 = new Board_a();
-    Board_a boardList3 = new Board_a();
 
     Register_Admin memberList = new Register_Admin();
     ExistingMember Elist = new ExistingMember(memberList);  
-
+    Check checkList = new Check(memberList);
 
 
 
@@ -41,8 +38,8 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
       while(true) {
         System.out.println("[ 헬스장 관리 프로그램 ]");
         System.out.println("[1] 신규 회원 [2] 기존 회원 ");
-        System.out.println("[3.1 ~ 3.3] 글 작성 ");
-        System.out.println("[4.1 ~ 4.3] 글 목록");
+        System.out.println("[3] 출석 체크 ");
+        System.out.println("[4] 게시판 ");
         System.out.println("[5] 관리자 모드 ");
         System.out.println("[6] 종료 ");
         String command =  com.kim.util.Prompt.inputString("번호를 선택해주세요: ");
@@ -55,24 +52,12 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
           case "2" :  
             Elist.add2();
             break;
-          case "3.1" :
-            boardList1.add3(boardList1);
+          case "3" :  
+            checkList.list();
             break;
-          case "3.2" :
-            boardList2.add3(boardList2);
-            break;
-          case "3.3" :
-            boardList3.add3(boardList3);
-            break;
-          case "4.1" :
-            boardList1.list();
-            break;
-          case "4.2" :
-            boardList2.list();
-            break;
-          case "4.3" :
-            boardList3.list();
-            break;
+          case "4" :  
+            Board_a();
+            break;          
           case "5" :
             memberList.add4();
             break;
@@ -91,4 +76,10 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
     Prompt.close();
   }
+
+  private static void Board_a() {
+
+
+  }
+
 }

@@ -28,7 +28,7 @@ public class ExistingMember {
       } else if (this.memberList.exist(id)) {   
         m.ID1 = id;    
 
-        System.out.println("[]회원님 반갑습니다.");  
+        System.out.println("회원님 반갑습니다.");  
 
         break;
       } else {
@@ -37,6 +37,7 @@ public class ExistingMember {
     }
     loop:
       while (true) {
+        System.out.println();
         System.out.println("[1] pt 신청하기 [2] bmi 계산하기 [3] 메뉴로 돌아가기");
         String command1 = Prompt.inputString("번호를 선택해주세요: ");
 
