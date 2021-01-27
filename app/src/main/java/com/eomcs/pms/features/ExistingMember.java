@@ -1,25 +1,25 @@
 package com.eomcs.pms.features;
 
-import com.eomcs.pms.domain.existing;
+import com.eomcs.pms.domain.Existing;
 import com.eomcs.util.Prompt;
 
-public class existingMember {
+public class ExistingMember {
 
   static final int MEMBER_SIZE= 1000;
 
-  existing[] members = new existing[MEMBER_SIZE];
+  Existing[] members = new Existing[MEMBER_SIZE];
   int size = 0;
 
   public Register_Admin memberList;
 
-  public existingMember(Register_Admin register) {
+  public ExistingMember(Register_Admin register) {
     this.memberList = register;
   }
 
   public void add2 () {
     System.out.println("[기존 회원]");
 
-    existing m = new existing();
+    Existing m = new Existing();
     while (true) {
       String id = Prompt.inputString("ID: (취소: 빈 문자열)");
       if (id.length() == 0) {
@@ -46,7 +46,7 @@ public class existingMember {
 
 
             for (int i = 0; i < size; i++) {
-              existing m1 = this.members[i];
+              Existing m1 = this.members[i];
 
               String status1 = null;
               switch (m1.status) {
@@ -84,7 +84,7 @@ public class existingMember {
   public void list() {
     System.out.println("[회원 정보]");
     for (int i = 0; i < this.size; i++) {
-      existing m = this.members[i];
+      Existing m = this.members[i];
       System.out.printf("%d\n" ,m.ID1);
     }
   }

@@ -2,10 +2,10 @@ package com.eomcs.pms;
 
 import com.eomcs.pms.features.Board_a;
 import com.eomcs.pms.features.Register_Admin;
-import com.eomcs.pms.features.existingMember;
+import com.eomcs.pms.features.ExistingMember;
 import com.eomcs.util.Prompt;
 
-public class myproject1 {
+public class MyProject1 {
 
 
   /*헬스장 회원 관리 
@@ -32,7 +32,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
     Board_a boardList3 = new Board_a();
 
     Register_Admin memberList = new Register_Admin();
-    existingMember Elist = new existingMember(memberList);  
+    ExistingMember Elist = new ExistingMember(memberList);  
 
 
 
