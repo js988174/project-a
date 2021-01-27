@@ -1,8 +1,8 @@
 package com.kim.pms;
 
 import com.kim.pms.features.Board_a;
-import com.kim.pms.features.Register_Admin;
 import com.kim.pms.features.ExistingMember;
+import com.kim.pms.features.Register_Admin;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
@@ -39,6 +39,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
     loop:
       while(true) {
+        System.out.println("[ 헬스장 관리 프로그램 ]");
         System.out.println("[1] 신규 회원 [2] 기존 회원 ");
         System.out.println("[3.1 ~ 3.3] 글 작성 ");
         System.out.println("[4.1 ~ 4.3] 글 목록");
