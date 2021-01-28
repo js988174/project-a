@@ -59,7 +59,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
             Board_a();
             break;          
           case "5" :
-            memberList.add4();
+            memberList.add5();
             break;
           case "6" :
             System.out.println("시스템을 종료합니다. ");
