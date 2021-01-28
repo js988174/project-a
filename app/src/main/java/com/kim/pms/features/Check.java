@@ -19,6 +19,8 @@ public class Check {
   public void list() {
     Existing m = new Existing();
     while (true) {
+      System.out.println();
+      System.out.println("===========출석 체크=============");
       String id = Prompt.inputString("ID: (취소: 빈 문자열)");
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");

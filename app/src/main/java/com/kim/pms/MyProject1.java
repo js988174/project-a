@@ -80,9 +80,5 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
     Prompt.close();
   }
 
-  private static void Board_a() {
-
-
-  }
 
 }

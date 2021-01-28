@@ -2,7 +2,6 @@ package com.kim.pms.features;
 import java.util.Scanner;
 import com.kim.util.Prompt;
 
-
 public class Admin {
 
   static Scanner scanner = new Scanner(System.in);
@@ -20,17 +19,34 @@ public class Admin {
   }
 
 
+  /*System.out.println();  로그인 메서드
+  System.out.println("[관리자 모드]"); 
 
+  System.out.print("id: ");
+  String ID = scanner.nextLine();
+  System.out.print("password: ");
+  String PW = scanner.nextLine();
+  String id1 = "admin";
+  String pass = "1234";
+
+  if(ID.equals(id1) && PW.equals(pass)){
+    System.out.println("로그인 성공 ");
+
+  }else {
+    System.out.println("로그인 실패");
+  }
+   */
   public void service() {
     while(true) {
+      System.out.println();
       System.out.println("===============[관리자]================");
-      System.out.println("[1]  회원 정보 목록");
+      System.out.println("[1] 회원 정보 목록");
       System.out.println("[2] 회원 정보 수정");
       System.out.println("[3] 회원 삭제");
       System.out.println("[4] 메뉴로 돌아가기");
       System.out.println("=======================================");
       String command1 = Prompt.inputString("번호를 선택해주세요: ");
-
+      System.out.println();
       switch(command1) {
         case "1" :      
           this.list();
@@ -57,7 +73,9 @@ public class Admin {
     }
   }     
   public void list() {
+
     for (int i = 0; i < this.size; i++) {
+
       Admin m = this.members[i];
 
       String status1 = null;

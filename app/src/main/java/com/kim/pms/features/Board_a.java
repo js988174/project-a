@@ -24,6 +24,7 @@ public class Board_a {
       System.out.println("[6] 메뉴로 돌아가기");
       System.out.println("=======================================");
       String command1 = Prompt.inputString("번호를 선택해주세요: ");
+      System.out.println();
 
       switch(command1) {
         case "1" :            
