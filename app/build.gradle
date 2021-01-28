@@ -37,3 +37,6 @@ application {
     // Define the main class for the application.
     mainClass = 'com.kim.pms.App'
 }
+tasks.withType(JavaCompile) {
+      // $javac -encoding UTF-8....
+    options.encoding = 'UTF-8' 

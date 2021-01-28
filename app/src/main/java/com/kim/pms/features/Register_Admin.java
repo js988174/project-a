@@ -15,6 +15,7 @@ public class Register_Admin {
   Register[] members = new Register[MEMBER_NUMBER];
   int size = 0;
 
+
   public void add1() {
     Register m = new Register();
 
@@ -44,11 +45,8 @@ public class Register_Admin {
   }
 
   public void add5() {
-    // 회원 목록과 남은 일수 
+
     System.out.println("[관리자 모드]"); 
-
-    // 관리자 로그인 하여 회원 삭제
-
 
     System.out.print("id: ");
     String ID = scanner.nextLine();
@@ -63,12 +61,12 @@ public class Register_Admin {
 
       while(true) {
         System.out.println();
-        System.out.println("[1]  회원 정보 [2] 회원 정보 수정 [3] 회원 삭제  [4] 메뉴로 돌아가기 ");
+        System.out.println("[1]  회원 정보 목록 [2] 회원 정보 수정 [3] 회원 삭제  [4] 메뉴로 돌아가기 ");
         String command1 = Prompt.inputString("번호를 선택해주세요: ");
 
         switch(command1) {
           case "1" :      
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < this.size; i++) {
               Register m = this.members[i];
 
               String status1 = null;
@@ -88,7 +86,7 @@ public class Register_Admin {
                   ,  m.id, m.number, m.name, m.phone, m.adress, m.birth , m.job, m.gender 
                   ,m.email, m.now, status1 );
             }
-            break;
+            break;      
           case "2" :   
             System.out.println();
             System.out.println("[회원 정보 수정]");
@@ -147,9 +145,11 @@ public class Register_Admin {
             System.out.println("다시 입력해주세요. ");
             System.out.println();
             break;
-        }
+
+        }      
 
       }      
+
     }else {
       System.out.println("로그인 실패");
     }
