@@ -2,7 +2,6 @@ package com.kim.pms.features;
 
 import java.text.SimpleDateFormat;
 import com.kim.pms.domain.Existing;
-import com.kim.pms.domain.Register;
 import com.kim.util.Prompt;
 
 public class Check {
@@ -11,10 +10,10 @@ public class Check {
   Register[] members = new Register[MEMBER_NUMBER];
   int size = 0;
 
-  public Register_Admin memberList;
+  Register registerList;
 
-  public Check(Register_Admin check) {
-    this.memberList = check;
+  public Check(Register registerHandler) {
+    this.registerList = registerHandler;
   }
 
   public void list() {
@@ -24,7 +23,7 @@ public class Check {
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (this.memberList.exist(id)) {   
+      } else if (this.registerList.exist(id)) {   
         m.ID1 = id;    
 
         break;

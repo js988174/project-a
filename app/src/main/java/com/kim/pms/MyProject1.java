@@ -1,9 +1,10 @@
 package com.kim.pms;
 
+import com.kim.pms.features.Admin;
 import com.kim.pms.features.Board_a;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.ExistingMember;
-import com.kim.pms.features.Register_Admin;
+import com.kim.pms.features.Register;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
@@ -28,10 +29,11 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
   public static void main(String[] args) {
 
-    Board_a boardList = new Board_a();
-    Register_Admin memberList = new Register_Admin();
-    ExistingMember Elist = new ExistingMember(memberList);  
-    Check checkList = new Check(memberList);
+    Board_a boardHandler = new Board_a();
+    Register memberHandler = new Register();
+    Admin adminHandler = new Admin(memberHandler);
+    ExistingMember existHandler = new ExistingMember(memberHandler);  
+    Check checkHandler = new Check(memberHandler);
 
 
 
@@ -48,19 +50,19 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
         switch (command) {
           case "1" :   
-            memberList.add1();
+            memberHandler.add();
             break;
           case "2" :  
-            Elist.add2();
+            existHandler.list();
             break;
           case "3" :  
-            checkList.list();
+            checkHandler.list();
             break;
           case "4" :  
-            boardList.board();
+            boardHandler.board();
             break;          
           case "5" :
-            memberList.add5();
+            adminHandler.service();
             break;
           case "6" :
             System.out.println("시스템을 종료합니다. ");

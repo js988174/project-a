@@ -10,13 +10,13 @@ public class ExistingMember {
   Existing[] members = new Existing[MEMBER_SIZE];
   int size = 0;
 
-  public Register_Admin memberList;
+  Register registerList;
 
-  public ExistingMember(Register_Admin register) {
-    this.memberList = register;
+  public ExistingMember(Register registerHandler) {
+    this.registerList = registerHandler;
   }
 
-  public void add2 () {
+  public void list() {
     System.out.println("[기존 회원]");
 
     Existing m = new Existing();
@@ -25,7 +25,7 @@ public class ExistingMember {
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (this.memberList.exist(id)) {   
+      } else if (this.registerList.exist(id)) {   
         m.ID1 = id;    
 
         System.out.println("회원님 반갑습니다.");  
@@ -82,11 +82,5 @@ public class ExistingMember {
       this.members[this.size++] = m;
     }
   }
-  public void list() {
-    System.out.println("[회원 정보]");
-    for (int i = 0; i < this.size; i++) {
-      Existing m = this.members[i];
-      System.out.printf("%d\n" ,m.ID1);
-    }
-  }
+
 }

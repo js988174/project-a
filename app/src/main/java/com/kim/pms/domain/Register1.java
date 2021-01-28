@@ -2,7 +2,7 @@ package com.kim.pms.domain;
 
 import java.sql.Date;
 
-public class Register {
+public class Register1 {
   public String id;
   public int number;
   public String name;
