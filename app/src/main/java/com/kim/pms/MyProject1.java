@@ -1,5 +1,6 @@
 package com.kim.pms;
 
+import com.kim.pms.features.Board_a;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.ExistingMember;
 import com.kim.pms.features.Register_Admin;
@@ -27,7 +28,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
 
   public static void main(String[] args) {
 
-
+    Board_a boardList = new Board_a();
     Register_Admin memberList = new Register_Admin();
     ExistingMember Elist = new ExistingMember(memberList);  
     Check checkList = new Check(memberList);
@@ -56,7 +57,7 @@ pt 회원 : id를 검색하면 몇회 남았고 ,예약 시간 추가하기
             checkList.list();
             break;
           case "4" :  
-            Board_a();
+            boardList.board();
             break;          
           case "5" :
             memberList.add5();

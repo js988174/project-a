@@ -12,8 +12,9 @@ public class Board_a {
   Board[] boards = new Board[SIZE];
   int size = 0;
 
-  public void boardlist () {
+  public void board () {
     while(true) {
+      System.out.println();
       System.out.println("[1]  글 등록 [2] 글 보기 [3] 글 변경 [4] 글 목록 [5] 글 삭제");
       String command1 = Prompt.inputString("번호를 선택해주세요: ");
 
