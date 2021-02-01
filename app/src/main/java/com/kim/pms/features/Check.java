@@ -5,15 +5,13 @@ import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
 
 public class Check {
-  static final int MEMBER_NUMBER = 1000;
 
-  Register[] members = new Register[MEMBER_NUMBER];
-  int size = 0;
 
-  Register registerList;
 
-  public Check(Register registerHandler) {
-    this.registerList = registerHandler;
+  AdminList adminList;
+
+  public Check(AdminList adminList) {
+    this.adminList = adminList;
   }
 
   public void list() {
@@ -25,7 +23,7 @@ public class Check {
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (this.registerList.exist(id)) {   
+      } else if (this.adminList.exist(id)) {   
         m.ID1 = id;    
 
         break;
@@ -33,11 +31,13 @@ public class Check {
         System.out.println("등록된 회원이 아닙니다.");
       }
     }                
+
     System.out.println();
     String input = Prompt.inputString("입장 하시겠습니까?(y/n)");
-
+    System.out.println();
     if (input.equalsIgnoreCase("y")) {     
       System.out.println("회원님 반갑습니다.");
+      System.out.println("입장시간 >");
       SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");            
       String format_time1 = format.format (System.currentTimeMillis());                                       
       System.out.println(format_time1);
@@ -47,5 +47,5 @@ public class Check {
     }
     return;   
   }
-
 }
+

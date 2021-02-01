@@ -5,32 +5,38 @@ import com.kim.util.Prompt;
 
 public class ExistingMember {
 
+
   static final int MEMBER_SIZE= 1000;
 
   Existing[] members = new Existing[MEMBER_SIZE];
   int size = 0;
 
-  Register registerList;
+  AdminList adminList;
 
-  public ExistingMember(Register registerHandler) {
-    this.registerList = registerHandler;
+  public ExistingMember(AdminList adminList) {
+    this.adminList = adminList;
   }
+
+
 
   public void list() {
     System.out.println("[기존 회원]");
 
     Existing m = new Existing();
     while (true) {
+
       String id = Prompt.inputString("ID: (취소: 빈 문자열)");
+      Existing existing = new Existing();
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (this.registerList.exist(id)) {   
+
+      } else if (this.adminList.exist(id)) {   
         m.ID1 = id;    
 
         System.out.println("회원님 반갑습니다.");  
-
         break;
+
       } else {
         System.out.println("등록된 회원이 아닙니다.");
       }
