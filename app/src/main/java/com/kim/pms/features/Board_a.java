@@ -7,11 +7,7 @@ import com.kim.util.Prompt;
 
 public class Board_a {
 
-  static final int DEFAULT_CAPACITY = 100;
-
-  Node first;
-  Node last;
-  int size = 0;
+  BoardList boardList = new BoardList();
 
   public void board () {
     while(true) {
@@ -56,7 +52,9 @@ public class Board_a {
     }    
   }
   public void add() {
+
     Board b = new Board();
+
     System.out.println("[게시글 등록]");
     b.no = Prompt.inputInt("글 번호: " );
     b.title = Prompt.inputString("글 제목: ");
@@ -65,28 +63,17 @@ public class Board_a {
     b.now = new Date(System.currentTimeMillis());
     b.viewCount = 0;
 
+    boardList.add(b);
 
-    Node node = new Node(b);
-
-    if (last == null) {
-      last = node;
-      first = node;
-    } else {
-      last.next = node;
-      node.prev = last;
-      last = node;
-    }
-    size++;
     System.out.println("[글을 등록했습니다.]");
   }
+
   public void list() {
     System.out.println("[게시글 목록]");
 
-    Node cursor = first;
+    Board[] boards = boardList.toArray();
 
-    while (cursor != null) {
-      Board b = cursor.board;
-
+    for (Board b : boards) {
 
       System.out.printf("%d, %s, %s, %s, %d, %s\n", 
           b.no, 
@@ -96,19 +83,20 @@ public class Board_a {
           b.viewCount,
           b.now);
 
-      cursor = cursor.next;
     }
   }
+
   public void detail() {
     System.out.println("[게시글 보기]");
 
     int no = Prompt.inputInt("번호: ");
 
-    Board board = findByNo(no);
+    Board board = boardList.get(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
     board.viewCount++;
     System.out.printf("제목: %s\n", board.title);
     System.out.printf("내용: %s\n", board.content);
@@ -116,12 +104,13 @@ public class Board_a {
     System.out.printf("등록일: %s\n", board.now);
     System.out.printf("조회수: %d\n", board.viewCount);
   }
+
   public void update() {
     System.out.println("게시글 변경");
 
     int no = Prompt.inputInt("번호: ");
 
-    Board board = findByNo(no);
+    Board board = boardList.get(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -145,7 +134,7 @@ public class Board_a {
 
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.get(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -153,56 +142,12 @@ public class Board_a {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      Node cursor = first;
-      while (cursor != null) {
-        if (cursor.board == board) {
-          if (first == last ) {
-            first = last = null;
-            break;
-          }
-          if (cursor == first) {
-            first = cursor.next;
-            cursor.prev = null;
-          } else {
-            cursor.prev.next = cursor.next;
-            if (cursor.next != null) {
-              cursor.next.prev = cursor.prev;
-            }
-          }
-          if (cursor == last) {
-            last = cursor.prev;
-          }
-          this.size--;
-          break;
-        }
-        cursor = cursor.next;
-      }
+      boardList.delete(no);
+
       System.out.println("게시글을 삭제하였습니다.");
     }else {
       System.out.println("게시글 삭제를 취소하였습니다.");
     }
   }
-
-
-  Board findByNo(int boardNo) {
-    Node cursor = first;
-    while (cursor != null) {
-      Board b = cursor.board; 
-      if (b.no == boardNo) {
-        return b; 
-
-      }
-      cursor = cursor.next;
-    }
-    return null;
-  }
-  static class Node {
-    Board board;
-    Node next;
-    Node prev;
-
-    Node(Board b) {
-      this.board = b;
-    }
-  }
 }
+
