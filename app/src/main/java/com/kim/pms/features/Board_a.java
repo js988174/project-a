@@ -3,11 +3,12 @@ package com.kim.pms.features;
 
 import java.sql.Date;
 import com.kim.pms.domain.Board;
+import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class Board_a {
 
-  BoardList boardList = new BoardList();
+  List boardList = new List();
 
   public void board () {
     while(true) {
@@ -56,12 +57,12 @@ public class Board_a {
     Board b = new Board();
 
     System.out.println("[게시글 등록]");
-    b.no = Prompt.inputInt("글 번호: " );
-    b.title = Prompt.inputString("글 제목: ");
-    b.content = Prompt.inputString("글 내용: ");
-    b.writer = Prompt.inputString("작성자: ");
-    b.now = new Date(System.currentTimeMillis());
-    b.viewCount = 0;
+    b.setNo(Prompt.inputInt("글 번호: " ));
+    b.setTitle(Prompt.inputString("글 제목: "));
+    b.setContent(Prompt.inputString("글 내용: "));
+    b.setWriter(Prompt.inputString("작성자: "));
+    b.setNow(new Date(System.currentTimeMillis()));
+    b.setViewCount(0);
 
     boardList.add(b);
 
@@ -71,17 +72,18 @@ public class Board_a {
   public void list() {
     System.out.println("[게시글 목록]");
 
-    Board[] boards = boardList.toArray();
+    Object[] list = boardList.toArray();
 
-    for (Board b : boards) {
+    for (Object obj : list) {
+      Board b = (Board) obj;
 
       System.out.printf("%d, %s, %s, %s, %d, %s\n", 
-          b.no, 
-          b.title, 
-          b.content,
-          b.writer, 
-          b.viewCount,
-          b.now);
+          b.getNo(), 
+          b.getTitle(), 
+          b.getContent(),
+          b.getWriter(), 
+          b.getViewCount(),
+          b.getNow());
 
     }
   }
@@ -91,18 +93,18 @@ public class Board_a {
 
     int no = Prompt.inputInt("번호: ");
 
-    Board board = boardList.get(no);
+    Board board = findByNo(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    board.viewCount++;
-    System.out.printf("제목: %s\n", board.title);
-    System.out.printf("내용: %s\n", board.content);
-    System.out.printf("작성자: %s\n", board.writer);
-    System.out.printf("등록일: %s\n", board.now);
-    System.out.printf("조회수: %d\n", board.viewCount);
+    board.setViewCount(board.getViewCount() + 1);
+    System.out.printf("제목: %s\n", board.getTitle());
+    System.out.printf("내용: %s\n", board.getContent());
+    System.out.printf("작성자: %s\n", board.getWriter());
+    System.out.printf("등록일: %s\n", board.getNow());
+    System.out.printf("조회수: %d\n", board.getViewCount());
   }
 
   public void update() {
@@ -110,19 +112,19 @@ public class Board_a {
 
     int no = Prompt.inputInt("번호: ");
 
-    Board board = boardList.get(no);
+    Board board = findByNo(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-    String title = Prompt.inputString(String.format("제목(%s):", board.title));
-    String content = Prompt.inputString(String.format("내용(%s):", board.content));
+    String title = Prompt.inputString(String.format("제목(%s):", board.getTitle()));
+    String content = Prompt.inputString(String.format("내용(%s):", board.getContent()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/n)");
 
     if( input.equalsIgnoreCase("y")) {
-      board.title = title;
-      board.content = content;
+      board.setTitle(title);
+      board.setContent(content);
       System.out.println("게시글을 변경하였습니다.");
     }else {
       System.out.println("게시글 변경을 취소하였습니다.");
@@ -134,7 +136,7 @@ public class Board_a {
 
     int no = Prompt.inputInt("번호? ");
 
-    Board board = boardList.get(no);
+    Board board = findByNo(no);
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -142,12 +144,24 @@ public class Board_a {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      boardList.delete(no);
+      boardList.delete(board);
 
       System.out.println("게시글을 삭제하였습니다.");
     }else {
       System.out.println("게시글 삭제를 취소하였습니다.");
     }
   }
+  private Board findByNo(int boardNo) {
+    Object[] list = boardList.toArray();
+    for (Object obj : list) {
+      Board b = (Board) obj;
+      if (b.getNo() == boardNo) {
+        return b;
+      }
+    }
+    return null;
+  }
+
 }
+
 

@@ -2,13 +2,14 @@ package com.kim.pms.features;
 import java.util.Random;
 import java.util.Scanner;
 import com.kim.pms.domain.Admin1;
+import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class Admin {
   static Scanner scanner = new Scanner(System.in);
   static Random random = new Random();
 
-  public AdminList adminList = new AdminList();
+  public List adminList = new List();
 
   /*System.out.println();  로그인 메서드
   System.out.println("[관리자 모드]"); 
@@ -31,7 +32,6 @@ public class Admin {
   public void service() {
 
     while(true) {
-      System.out.println();
       System.out.println("===============[관리자]================");
       System.out.println("[1] 회원 정보 목록");
       System.out.println("[2] 회원 정보 수정");
@@ -74,33 +74,33 @@ public class Admin {
 
     System.out.println("회원 락커룸 지정: ");
     System.out.printf("> ");
-    m.number = random.nextInt(150)+1;
-    System.out.println(m.number);
+    m.setNumber(random.nextInt(150)+1);
+    System.out.println(m.getNumber());
 
 
 
     System.out.println();
-    m.id = Prompt.inputString("id: ");
-    m.name = Prompt.inputString("회원 이름: ");
-    m.phone = Prompt.inputString("전화 번호: ");
-    m.adress = Prompt.inputString("주소: ");
-    m.birth = Prompt.inputString("생년 월일: ");
-    m.job = Prompt.inputString("직업: ");
-    m.gender = Prompt.inputString("성별: ");
-    m.email =Prompt.inputString("이메일: ");
-    m.now = new java.sql.Date(System.currentTimeMillis());
-    m.status = Prompt.inputInt("등록기간:\n0: 3개월[5만원]\n1: 6개월[8만원]\n2: 12개월[15만원]\n>");
+    m.setId(Prompt.inputString("id: "));
+    m.setName(Prompt.inputString("회원 이름: "));
+    m.setPhone(Prompt.inputString("전화 번호: "));
+    m.setAdress(Prompt.inputString("주소: "));
+    m.setBirth(Prompt.inputString("생년 월일: "));
+    m.setJob(Prompt.inputString("직업: "));
+    m.setGender(Prompt.inputString("성별: "));
+    m.setEmail(Prompt.inputString("이메일: "));
+    m.setNow(new java.sql.Date(System.currentTimeMillis()));
+    m.setStatus(Prompt.inputInt("등록기간:\n0: 3개월[5만원]\n1: 6개월[8만원]\n2: 12개월[15만원]\n>"));
 
     adminList.add(m);
     System.out.println("회원을 등록하였습니다.");
   }
   public void list() {
 
-    Admin1[] admins = adminList.toArray();
-    for (Admin1 m : admins) {
-
+    Object[] list = adminList.toArray();
+    for (Object obj : list) {
+      Admin1 m = (Admin1) obj;
       String status1 = null;
-      switch (m.status) {
+      switch (m.getStatus()) {
         case 1:
           status1 = "6개월 신청[8만원]";
           break;
@@ -113,8 +113,8 @@ public class Admin {
       }
       System.out.printf("회원 id: %s ,회원 번호: %d ,회원 이름: %s ,전화 번호: %s ,"
           + " 주소: %s ,생년 월일: %s  ,직업: %s ,성별: %s ,이메일: %s ,등록 날짜: %s ,등록 기간: %s\n"
-          ,  m.id, m.number, m.name, m.phone, m.adress, m.birth , m.job, m.gender 
-          ,m.email, m.now, status1 );
+          ,  m.getId(), m.getNumber(), m.getName(), m.getPhone(), m.getAdress(), m.getBirth() , m.getJob()
+          , m.getGender(), m.getEmail(), m.getNow(), status1 );
     }
   }
   public void update() {
@@ -122,21 +122,21 @@ public class Admin {
     System.out.println("[회원 정보 변경]");
     String id = Prompt.inputString("id: ");
 
-    Admin1 admin = adminList.get(id);   
+    Admin1 admin = findById(id);   
     if (admin == null) {         
       System.out.println("등록 되지 않은 아이디입니다.");
       return;
     }
-    String name = Prompt.inputString(String.format("이름(%s)? ", admin.name));
-    String adress = Prompt.inputString(String.format("변경 하실 주소(%s): ", admin.adress));
-    String phone = Prompt.inputString(String.format("변경 하실 번호(%s)" , admin.phone));
+    String name = Prompt.inputString(String.format("이름(%s)? ", admin.getName()));
+    String adress = Prompt.inputString(String.format("변경 하실 주소(%s): ", admin.getAdress()));
+    String phone = Prompt.inputString(String.format("변경 하실 번호(%s)" , admin.getPhone()));
 
     String input = Prompt.inputString("변경 하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      admin.name = name;
-      admin.adress = adress;
-      admin.phone = phone;
+      admin.setName(name);
+      admin.setAdress(adress);
+      admin.setPhone(phone);
       System.out.println("정보를 변경하였습니다.");
 
     }else {
@@ -150,7 +150,7 @@ public class Admin {
 
     String id = Prompt.inputString("id: ");
 
-    Admin1 admin = adminList.get(id);
+    Admin1 admin = findById(id);
 
     if (admin == null) {
       System.out.println("등록 되지 않은 아이디입니다.");
@@ -159,7 +159,7 @@ public class Admin {
     String input = Prompt.inputString("회원 정보를 삭제하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      adminList.delete(id);
+      adminList.delete(admin);
       System.out.println("회원을 삭제하였습니다.");
     }else {
       System.out.println("회원 정보 삭제를 취소하였습니다.");
@@ -167,6 +167,16 @@ public class Admin {
 
   }
 
+  private Admin1 findById(String id) {
+    Object[] list = adminList.toArray();
+    for (Object obj : list) {
+      Admin1 m = (Admin1) obj;
+      if (m.getId().equals(id)) {
+        return m;
+      }
+    }
+    return null;
+  }
 }
 
 

@@ -2,15 +2,15 @@ package com.kim.pms.features;
 
 import java.text.SimpleDateFormat;
 import com.kim.pms.domain.Existing;
+import com.kim.util.List;
 import com.kim.util.Prompt;
-
 public class Check {
 
 
 
-  AdminList adminList;
+  List adminList;
 
-  public Check(AdminList adminList) {
+  public Check(List adminList) {
     this.adminList = adminList;
   }
 
@@ -23,10 +23,10 @@ public class Check {
       if (id.length() == 0) {
         System.out.println("ID입력을 취소합니다.");
         return;
-      } else if (this.adminList.exist(id)) {   
-        m.ID1 = id;    
-
-        break;
+      } else if  (m.getID1().equals(id)) {   
+        adminList.add(id);
+        System.out.println("로그인 되었습니다.");
+        break;     
       } else {
         System.out.println("등록된 회원이 아닙니다.");
       }
@@ -47,5 +47,6 @@ public class Check {
     }
     return;   
   }
+
 }
 

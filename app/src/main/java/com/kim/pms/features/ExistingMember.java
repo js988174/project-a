@@ -1,6 +1,7 @@
 package com.kim.pms.features;
 
 import com.kim.pms.domain.Existing;
+import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class ExistingMember {
@@ -11,9 +12,9 @@ public class ExistingMember {
   Existing[] members = new Existing[MEMBER_SIZE];
   int size = 0;
 
-  AdminList adminList;
+  List adminList;
 
-  public ExistingMember(AdminList adminList) {
+  public ExistingMember(List adminList) {
     this.adminList = adminList;
   }
 
@@ -31,8 +32,7 @@ public class ExistingMember {
         System.out.println("ID입력을 취소합니다.");
         return;
 
-      } else if (this.adminList.exist(id)) {   
-        m.ID1 = id;    
+      } else if (m.getID1().equals(id)) {   
 
         System.out.println("회원님 반갑습니다.");  
         break;
@@ -49,14 +49,14 @@ public class ExistingMember {
 
       switch (command1) {
         case "1":
-          m.status = Prompt.inputInt("\n0: 1회 [5만원]\n1: 10회 [45만원]\n2: 15회 [68만원]\n ");
+          m.setStatus(Prompt.inputInt("\n0: 1회 [5만원]\n1: 10회 [45만원]\n2: 15회 [68만원]\n "));
 
 
           for (int i = 0; i < size; i++) {
             Existing m1 = this.members[i];
 
             String status1 = null;
-            switch (m1.status) {
+            switch (m1.getStatus()) {
               case 1:
                 status1 = "10회 [45만원]";
                 break;
@@ -73,9 +73,9 @@ public class ExistingMember {
         case "2": 
           String bmicalculation = Prompt.inputString("bmi지수를 계산하시겠습니까?[yes/no]");
           if(bmicalculation.equalsIgnoreCase("yes")) {
-            m.height = Prompt.inputInt("몸무게: ");    
-            m.weight = Prompt.inputInt("키: ");
-            double bmi = m.weight/m.height/m.height ;
+            m.setHeight(Prompt.inputInt("몸무게: "));    
+            m.setWeight(Prompt.inputInt("키: "));
+            double bmi = m.getWeight()/m.getHeight()/m.getHeight() ;
             System.out.printf("bmi 지수: %.2f\n" ,bmi);
             break;
           }
