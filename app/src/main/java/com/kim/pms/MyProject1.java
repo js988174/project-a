@@ -5,10 +5,15 @@ import com.kim.pms.features.Board_a;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.ExistingMember;
 import com.kim.util.Prompt;
+import com.kim.util.Queue;
+import com.kim.util.QueueIterator;
+import com.kim.util.Stack;
+import com.kim.util.StackIterator;
 
 public class MyProject1 {
 
-
+  static Stack commandStack = new Stack();
+  static Queue commandQueue = new Queue();
 
 
   public static void main(String[] args) {
@@ -66,6 +71,35 @@ public class MyProject1 {
 
     Prompt.close();
   }
+  static void printCommandHistory() throws CloneNotSupportedException {
+
+    StackIterator iterator = new StackIterator(commandStack);
+
+    int count = 0;
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
+      if ((++count % 5) == 0) {
+        String input = Prompt.inputString(": ");
+        if (input.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
+  static void printCommandHistory2() throws CloneNotSupportedException {
 
 
+    QueueIterator iterator = new QueueIterator(commandQueue);
+
+    int count = 0;
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
+      if ((++count % 5) == 0) {
+        String input = Prompt.inputString(": ");
+        if (input.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
 }

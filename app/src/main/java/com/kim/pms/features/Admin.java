@@ -167,7 +167,7 @@ public class Admin {
 
   }
 
-  private Admin1 findById(String id) {
+  public Admin1 findById(String id) {
     Object[] list = adminList.toArray();
     for (Object obj : list) {
       Admin1 m = (Admin1) obj;
