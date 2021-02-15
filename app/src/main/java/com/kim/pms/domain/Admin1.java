@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class Admin1 {
   private String id;
-  private int number;
   private String name;
   private String phone;
   private String adress;
@@ -29,7 +28,6 @@ public class Admin1 {
     result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + ((now == null) ? 0 : now.hashCode());
-    result = prime * result + number;
     result = prime * result + ((phone == null) ? 0 : phone.hashCode());
     result = prime * result + status;
     return result;
@@ -83,8 +81,6 @@ public class Admin1 {
         return false;
     } else if (!now.equals(other.now))
       return false;
-    if (number != other.number)
-      return false;
     if (phone == null) {
       if (other.phone != null)
         return false;
@@ -99,12 +95,6 @@ public class Admin1 {
   }
   public void setId(String id) {
     this.id = id;
-  }
-  public int getNumber() {
-    return number;
-  }
-  public void setNumber(int number) {
-    this.number = number;
   }
   public String getName() {
     return name;

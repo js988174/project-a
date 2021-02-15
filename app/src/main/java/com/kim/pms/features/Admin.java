@@ -1,5 +1,6 @@
 package com.kim.pms.features;
-import java.util.Random;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import com.kim.pms.domain.Admin1;
 import com.kim.util.List;
@@ -7,7 +8,6 @@ import com.kim.util.Prompt;
 
 public class Admin {
   static Scanner scanner = new Scanner(System.in);
-  static Random random = new Random();
 
   public List adminList = new List();
 
@@ -72,11 +72,6 @@ public class Admin {
     System.out.println();
     System.out.println("[회원 등록]");
 
-    System.out.println("회원 락커룸 지정: ");
-    System.out.printf("> ");
-    m.setNumber(random.nextInt(150)+1);
-    System.out.println(m.getNumber());
-
 
 
     System.out.println();
@@ -95,14 +90,16 @@ public class Admin {
     System.out.println("회원을 등록하였습니다.");
   }
   public void list() {
-
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(new Date());
     Object[] list = adminList.toArray();
+
     for (Object obj : list) {
       Admin1 m = (Admin1) obj;
       String status1 = null;
       switch (m.getStatus()) {
         case 1:
-          status1 = "6개월 신청[8만원]";
+          status1 = "6개월 신청[8만원]";    
           break;
         case 2:
           status1 = "12개월 신청[15만원]";
@@ -111,10 +108,12 @@ public class Admin {
           status1 = "3개월 신청[5만원]";
           break;
       }
-      System.out.printf("회원 id: %s ,회원 번호: %d ,회원 이름: %s ,전화 번호: %s ,"
-          + " 주소: %s ,생년 월일: %s  ,직업: %s ,성별: %s ,이메일: %s ,등록 날짜: %s ,등록 기간: %s\n"
-          ,  m.getId(), m.getNumber(), m.getName(), m.getPhone(), m.getAdress(), m.getBirth() , m.getJob()
-          , m.getGender(), m.getEmail(), m.getNow(), status1 );
+      System.out.printf("회원 id: %s ,회원 이름: %s ,전화 번호: %s ,"
+          + " 주소: %s ,생년 월일:%s\n"
+          ,  m.getId(), m.getName(), m.getPhone(), m.getAdress(), m.getBirth());
+      System.out.printf("직업: %s ,성별: %s ,이메일: %s\n ", m.getJob()
+          , m.getGender(), m.getEmail());
+      System.out.printf("등록 날짜: %s ,등록 기간: %s\n" ,m.getNow(), status1 );
     }
   }
   public void update() {
@@ -166,8 +165,21 @@ public class Admin {
     }
 
   }
+  public String inputMember(String promptTitle) {
+    while (true) {
+      String id = Prompt.inputString(promptTitle);
+      if (id.length() == 0) {
+        return null;
+      }
+      if (findById(id) != null) {
+        return id;
+      }
+      System.out.println("등록된 회원이 아닙니다.");
+      System.out.println();
+    }
+  }
 
-  public Admin1 findById(String id) {
+  private Admin1 findById(String id) {
     Object[] list = adminList.toArray();
     for (Object obj : list) {
       Admin1 m = (Admin1) obj;

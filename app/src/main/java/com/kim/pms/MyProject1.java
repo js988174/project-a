@@ -22,9 +22,9 @@ public class MyProject1 {
 
     Admin adminHandler = new Admin();
 
-    ExistingMember existHandler = new ExistingMember(adminHandler.adminList);  
+    ExistingMember existHandler = new ExistingMember(adminHandler);  
 
-    Check checkHandler = new Check(adminHandler.adminList);
+    Check checkHandler = new Check(adminHandler);
 
 
 
@@ -45,7 +45,7 @@ public class MyProject1 {
             adminHandler.add();
             break;
           case "2" :  
-            existHandler.list();
+            existHandler.service();
             break;
           case "3" :  
             checkHandler.list();
