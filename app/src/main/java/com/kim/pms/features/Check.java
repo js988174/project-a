@@ -3,13 +3,10 @@ package com.kim.pms.features;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import com.kim.pms.domain.Existing;
-import com.kim.util.List;
 import com.kim.util.Prompt;
 public class Check {
   // 출석 체크를 하면 회원 이름과 시간 락커룸 신청 (랜덤 중복 안되게)  언제 왔는지 나타나게 하기
 
-
-  private List adminList = new List();
 
   private Admin admin;
 

@@ -1,16 +1,18 @@
 package com.kim.pms.features;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 import com.kim.pms.domain.Admin1;
+import com.kim.util.Iterator;
 import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class Admin {
   static Scanner scanner = new Scanner(System.in);
 
-  public List adminList = new List();
+  public List<Admin1> adminList = new List<>();
 
+  public List<Admin1> getAdminList() {
+    return this.adminList;
+  }
   /*System.out.println();  로그인 메서드
   System.out.println("[관리자 모드]"); 
 
@@ -29,7 +31,7 @@ public class Admin {
   }
    */
 
-  public void service() {
+  public void service() throws CloneNotSupportedException  {
 
     while(true) {
       System.out.println("===============[관리자]================");
@@ -87,15 +89,16 @@ public class Admin {
     m.setStatus(Prompt.inputInt("등록기간:\n0: 3개월[5만원]\n1: 6개월[8만원]\n2: 12개월[15만원]\n>"));
 
     adminList.add(m);
-    System.out.println("회원을 등록하였습니다.");
-  }
-  public void list() {
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(new Date());
-    Object[] list = adminList.toArray();
 
-    for (Object obj : list) {
-      Admin1 m = (Admin1) obj;
+    System.out.println("회원을 등록하였습니다.");
+
+  }
+  public void list() throws CloneNotSupportedException {
+
+    Iterator<Admin1> iterator = adminList.iterator();
+
+    while (iterator.hasNext()) {
+      Admin1 m = iterator.next();
       String status1 = null;
       switch (m.getStatus()) {
         case 1:
@@ -180,7 +183,7 @@ public class Admin {
   }
 
   private Admin1 findById(String id) {
-    Object[] list = adminList.toArray();
+    Admin1[] list = adminList.toArray(new Admin1[adminList.size()]);
     for (Object obj : list) {
       Admin1 m = (Admin1) obj;
       if (m.getId().equals(id)) {

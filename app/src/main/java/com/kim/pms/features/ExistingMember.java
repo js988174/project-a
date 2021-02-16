@@ -2,6 +2,7 @@ package com.kim.pms.features;
 
 import java.util.Random;
 import com.kim.pms.domain.Existing;
+import com.kim.util.Iterator;
 import com.kim.util.List;
 import com.kim.util.Prompt;
 public class ExistingMember {
@@ -10,7 +11,7 @@ public class ExistingMember {
 
 
 
-  private List adminList = new List();
+  private List<Existing> adminList = new List<>();
 
   private Admin admin;
 
@@ -20,7 +21,7 @@ public class ExistingMember {
 
 
 
-  public void service() {
+  public void service() throws CloneNotSupportedException {
     System.out.println("[기존 회원]");
 
     while (true) {
@@ -108,44 +109,43 @@ public class ExistingMember {
     adminList.add(m);
   }
 
-  public void list() {
+  public void list() throws CloneNotSupportedException {
 
-    Object[] list = adminList.toArray();
+    Iterator<Existing> iterator = adminList.iterator();
 
-    for (Object obj : list) {
-      Existing m1 = (Existing) obj;
-      String status1 = null;
-      switch (m1.getStatus()) {
-        case 1:
-          status1 = "10회 [45만원]";
-          break;
-        case 2:
-          status1 = "15회 [68만원]";
-          break;
-        default :
-          status1 = "1회 [5만원]";
-          break;
-      }
+    while (iterator.hasNext()) {
+      Existing m = iterator.next();
+
       System.out.println();
-      System.out.printf("pt 신청번호: %s\n", status1);
+      System.out.printf("pt 신청번호: %s\n", getStatus1(m.getStatus()));
     }        
 
-    for (Object obj : list) {
-      Existing m2 = (Existing) obj;
-      String status2 = null;
-      switch (m2.getStatus()) {
-        case 1:
-          status2 = "6개월 [5.5만원]";
-          break;
-        case 2:
-          status2 = "12개월 [10만원]";
-          break;
-        default :
-          status2 = "3개월 [1만원]";
-          break;
-      }
+
+    while (iterator.hasNext()) {
+      Existing m = iterator.next();
+
       System.out.println();
-      System.out.printf("락커룸 기간 : %s\n " , status2);
+      System.out.printf("락커룸 기간 : %s\n " , getStatus2(m.getStatus()));
     }        
+  }
+  String getStatus1(int status) {
+    switch (status) {
+      case 1:
+        return "10회 [45만원]";
+      case 2:
+        return "15회 [68만원]";
+      default:
+        return "1회 [5만원]";
+    }
+  }
+  String getStatus2(int status) {
+    switch (status) {
+      case 1:
+        return "6개월 [5.5만원]";
+      case 2:
+        return "12개월 [10만원]";
+      default:
+        return "3개월 [1만원]";
+    }
   }
 }

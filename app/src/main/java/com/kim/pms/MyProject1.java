@@ -1,22 +1,21 @@
 package com.kim.pms;
 
+import java.util.Iterator;
 import com.kim.pms.features.Admin;
 import com.kim.pms.features.Board_a;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.ExistingMember;
 import com.kim.util.Prompt;
 import com.kim.util.Queue;
-import com.kim.util.QueueIterator;
 import com.kim.util.Stack;
-import com.kim.util.StackIterator;
 
 public class MyProject1 {
 
-  static Stack commandStack = new Stack();
-  static Queue commandQueue = new Queue();
+  static Stack<String> commandStack = new Stack<>();
+  static Queue<String> commandQueue = new Queue<>();
 
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws CloneNotSupportedException {
 
     Board_a boardHandler = new Board_a();
 
@@ -38,6 +37,11 @@ public class MyProject1 {
         System.out.println("[6] 종료 ");
         String command =  com.kim.util.Prompt.inputString("번호를 선택해주세요: ");
 
+        if (command.length() == 0) 
+          continue;
+
+        commandStack.push(command);
+        commandQueue.offer(command);
 
         switch (command) {
 
@@ -71,26 +75,8 @@ public class MyProject1 {
 
     Prompt.close();
   }
-  static void printCommandHistory() throws CloneNotSupportedException {
 
-    StackIterator iterator = new StackIterator(commandStack);
-
-    int count = 0;
-    while (iterator.hasNext()) {
-      System.out.println(iterator.next());
-      if ((++count % 5) == 0) {
-        String input = Prompt.inputString(": ");
-        if (input.equalsIgnoreCase("q")) {
-          break;
-        }
-      }
-    }
-  }
-  static void printCommandHistory2() throws CloneNotSupportedException {
-
-
-    QueueIterator iterator = new QueueIterator(commandQueue);
-
+  static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
     while (iterator.hasNext()) {
       System.out.println(iterator.next());

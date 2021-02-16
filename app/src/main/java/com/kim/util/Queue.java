@@ -1,22 +1,42 @@
 package com.kim.util;
 
-public class Queue extends List implements Cloneable{
+public class Queue<E> extends List<E> implements Cloneable{
 
-  public boolean offer(Object e) {
+  public boolean offer(E e) {
     this.add(e);
     return true;
   }
 
-  public Object poll() {
+  public E poll() {
     return delete(0);
   }
+
+
+  @SuppressWarnings("unchecked")
   @Override
-  public Queue clone() throws CloneNotSupportedException {
-    Queue queue = new Queue();
+  public Queue<E> clone() throws CloneNotSupportedException {
+    Queue<E> queue = new Queue<>();
     Object[] values = this.toArray();
     for (Object value : values) {
-      queue.offer(value);
+      queue.offer((E)value);
     }
     return queue;
+  }
+  @Override
+  public Iterator<E> iterator() throws CloneNotSupportedException {
+    Queue<E> queue = this.clone();
+
+    return new Iterator<E>() {
+
+      @Override
+      public boolean hasNext() {
+        return queue.size() > 0;
+      }
+
+      @Override
+      public E next() {
+        return queue.poll();
+      }
+    };
   }
 }

@@ -8,9 +8,9 @@ import com.kim.util.Prompt;
 
 public class Board_a {
 
-  List boardList = new List();
+  private List<Board> boardList = new List<>();
 
-  public void board () {
+  public void board () throws CloneNotSupportedException {
     while(true) {
       System.out.println();
       System.out.println("===============[게시판]================");
@@ -69,13 +69,13 @@ public class Board_a {
     System.out.println("[글을 등록했습니다.]");
   }
 
-  public void list() {
+  public void list() throws CloneNotSupportedException {
     System.out.println("[게시글 목록]");
 
-    Object[] list = boardList.toArray();
+    com.kim.util.Iterator<Board> iterator = boardList.iterator();
 
-    for (Object obj : list) {
-      Board b = (Board) obj;
+    while (iterator.hasNext()) {
+      Board b = iterator.next();
 
       System.out.printf("%d, %s, %s, %s, %d, %s\n", 
           b.getNo(), 
@@ -152,7 +152,7 @@ public class Board_a {
     }
   }
   private Board findByNo(int boardNo) {
-    Object[] list = boardList.toArray();
+    Board[] list = boardList.toArray(new Board[0]);
     for (Object obj : list) {
       Board b = (Board) obj;
       if (b.getNo() == boardNo) {
