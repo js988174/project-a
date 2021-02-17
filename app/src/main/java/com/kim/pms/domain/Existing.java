@@ -4,7 +4,7 @@ public class Existing {
   private String ID1;
   private int status;
   private int number;
-
+  private int status1;
 
   @Override
   public int hashCode() {
@@ -54,6 +54,12 @@ public class Existing {
   }
   public void setStatus(int status) {
     this.status = status;
+  }
+  public int getStatus1() {
+    return status1;
+  }
+  public void setStatus1(int status1) {
+    this.status1 = status1;
   }
 
 

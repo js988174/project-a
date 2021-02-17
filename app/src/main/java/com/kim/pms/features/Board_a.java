@@ -2,13 +2,14 @@ package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
 import java.sql.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import com.kim.pms.domain.Board;
-import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class Board_a {
 
-  private List<Board> boardList = new List<>();
+  private LinkedList<Board> boardList = new LinkedList<>();
 
   public void board () throws CloneNotSupportedException {
     while(true) {
@@ -72,7 +73,7 @@ public class Board_a {
   public void list() throws CloneNotSupportedException {
     System.out.println("[게시글 목록]");
 
-    com.kim.util.Iterator<Board> iterator = boardList.iterator();
+    Iterator<Board> iterator = boardList.iterator();
 
     while (iterator.hasNext()) {
       Board b = iterator.next();
@@ -144,7 +145,7 @@ public class Board_a {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      boardList.delete(board);
+      boardList.remove(board);
 
       System.out.println("게시글을 삭제하였습니다.");
     }else {

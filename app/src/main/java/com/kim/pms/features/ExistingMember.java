@@ -1,9 +1,9 @@
 package com.kim.pms.features;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 import com.kim.pms.domain.Existing;
-import com.kim.util.Iterator;
-import com.kim.util.List;
 import com.kim.util.Prompt;
 public class ExistingMember {
 
@@ -11,7 +11,7 @@ public class ExistingMember {
 
 
 
-  private List<Existing> adminList = new List<>();
+  private LinkedList<Existing> adminList = new LinkedList<>();
 
   private Admin admin;
 
@@ -22,6 +22,7 @@ public class ExistingMember {
 
 
   public void service() throws CloneNotSupportedException {
+    System.out.println();
     System.out.println("[기존 회원]");
 
     while (true) {
@@ -37,7 +38,7 @@ public class ExistingMember {
         System.out.println("========개인 신청 목록========");
         System.out.println("[1] pt 신청하기");
         System.out.println("[2] 개인 락커룸 신청하기");
-        System.out.println("[3] 회원 정보");
+        System.out.println("[3] 신청 목록");
         System.out.println("[4] 메뉴로 돌아가기");
         System.out.println();
         String command1 = Prompt.inputString("번호를 선택해주세요: ");
@@ -82,13 +83,13 @@ public class ExistingMember {
   }
 
   public void room() {
-    Existing m = new Existing();
+    Existing m1 = new Existing();
 
     System.out.println();
     String input = Prompt.inputString("락커룸 신청(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      m.setStatus(Prompt.inputInt("\n0: 3개월 [1만원]\n1: 6개월 [5.5만원]\n2: 12개월 [10만원]\n "
+      m1.setStatus1(Prompt.inputInt("\n0: 3개월 [1만원]\n1: 6개월 [5.5만원]\n2: 12개월 [10만원]\n "
           + "락커룸 신청 :"));
       int Number[] = new int[1];
       Random r = new Random();
@@ -106,7 +107,7 @@ public class ExistingMember {
         System.out.printf("락커룸 번호: %d\n ", Number[i]);
       }
     }
-    adminList.add(m);
+    adminList.add(m1);
   }
 
   public void list() throws CloneNotSupportedException {
@@ -117,18 +118,19 @@ public class ExistingMember {
       Existing m = iterator.next();
 
       System.out.println();
-      System.out.printf("pt 신청번호: %s\n", getStatus1(m.getStatus()));
+      System.out.println("[신청 목록]");
+      System.out.printf("pt 신청번호: %s\n", getStatus(m.getStatus()));
     }        
-
 
     while (iterator.hasNext()) {
-      Existing m = iterator.next();
+      Existing m1 = iterator.next();
 
       System.out.println();
-      System.out.printf("락커룸 기간 : %s\n " , getStatus2(m.getStatus()));
+      System.out.printf("락커룸 기간 : %s\n " , getStatus1(m1.getStatus1()));
     }        
+
   }
-  String getStatus1(int status) {
+  String getStatus(int status) {
     switch (status) {
       case 1:
         return "10회 [45만원]";
@@ -138,7 +140,7 @@ public class ExistingMember {
         return "1회 [5만원]";
     }
   }
-  String getStatus2(int status) {
+  String getStatus1(int status) {
     switch (status) {
       case 1:
         return "6개월 [5.5만원]";

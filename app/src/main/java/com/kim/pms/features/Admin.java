@@ -1,18 +1,16 @@
 package com.kim.pms.features;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 import com.kim.pms.domain.Admin1;
-import com.kim.util.Iterator;
-import com.kim.util.List;
 import com.kim.util.Prompt;
 
 public class Admin {
   static Scanner scanner = new Scanner(System.in);
 
-  public List<Admin1> adminList = new List<>();
+  public LinkedList<Admin1> adminList = new LinkedList<>();
 
-  public List<Admin1> getAdminList() {
-    return this.adminList;
-  }
+
   /*System.out.println();  로그인 메서드
   System.out.println("[관리자 모드]"); 
 
@@ -101,6 +99,7 @@ public class Admin {
       Admin1 m = iterator.next();
       String status1 = null;
       switch (m.getStatus()) {
+        // 날짜 참조값 받아오기 
         case 1:
           status1 = "6개월 신청[8만원]";    
           break;
@@ -161,7 +160,7 @@ public class Admin {
     String input = Prompt.inputString("회원 정보를 삭제하시겠습니까?(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      adminList.delete(admin);
+      adminList.remove(admin);
       System.out.println("회원을 삭제하였습니다.");
     }else {
       System.out.println("회원 정보 삭제를 취소하였습니다.");
