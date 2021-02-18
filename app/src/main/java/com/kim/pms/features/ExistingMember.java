@@ -5,11 +5,9 @@ import java.util.LinkedList;
 import java.util.Random;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
-public class ExistingMember {
 
 
-
-
+public class ExistingMember implements Command{
 
   private LinkedList<Existing> adminList = new LinkedList<>();
 
@@ -21,7 +19,8 @@ public class ExistingMember {
 
 
 
-  public void service() throws CloneNotSupportedException {
+  @Override
+  public void service() {
     System.out.println();
     System.out.println("[기존 회원]");
 
