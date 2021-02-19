@@ -6,22 +6,23 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
-public class Check {
+public class Check implements Command {
   // 출석 체크를 하면 회원 이름과 시간 락커룸 신청 (랜덤 중복 안되게)  언제 왔는지 나타나게 하기
 
 
-  private Admin admin;
+  private AdminValidator adminValidator;
 
-  public Check(Admin admin) {
-    this.admin = admin;
+  public Check(AdminValidator adminValidator) {
+    this.adminValidator = adminValidator;
   }
 
-  public void list() {
+  @Override
+  public void service() {
     Existing m = new Existing();
     while (true) {
       System.out.println();
       System.out.println("===========출석 체크=============");
-      m.setID1(admin.inputMember("ID: (취소: 빈 문자열): "));
+      m.setID1(adminValidator.inputMember("ID: (취소: 빈 문자열): "));
       if (m.getID1() == null) {
         System.out.println("아이디 입력을 취소합니다.");
         return;

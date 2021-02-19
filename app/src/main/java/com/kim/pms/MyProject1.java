@@ -1,12 +1,18 @@
 package com.kim.pms;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import com.kim.pms.features.Admin;
-import com.kim.pms.features.Board_a;
+import com.kim.pms.domain.Admin1;
+import com.kim.pms.domain.Board;
+import com.kim.pms.domain.Existing;
+import com.kim.pms.features.AdminAdd;
+import com.kim.pms.features.AdminMenu;
+import com.kim.pms.features.AdminValidator;
+import com.kim.pms.features.BoardMenu;
 import com.kim.pms.features.Check;
-import com.kim.pms.features.ExistingMember;
+import com.kim.pms.features.ExistingMenu;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
@@ -17,13 +23,24 @@ public class MyProject1 {
 
   public static void main(String[] args) throws CloneNotSupportedException {
 
-    Board_a boardHandler = new Board_a();
 
-    Admin adminHandler = new Admin();
+    // 게시판 메뉴
+    ArrayList<Board> boardList = new ArrayList<>();
+    BoardMenu boardMenu = new BoardMenu(boardList);
 
-    ExistingMember existHandler = new ExistingMember(adminHandler);  
+    // 관리자 메뉴
+    ArrayList<Admin1> adminList = new ArrayList<>();
+    AdminAdd adminAdd = new AdminAdd(adminList);
+    AdminMenu adminMenu = new AdminMenu(adminList);
+    AdminValidator adminValidator = new AdminValidator(adminList);
 
-    Check checkHandler = new Check(adminHandler);
+
+    // 기존 회원 메뉴
+    ArrayList<Existing> existList = new ArrayList<>();
+    ExistingMenu existingMenu = new ExistingMenu(existList, adminValidator);  
+
+    // 출석 체크
+    Check check = new Check(adminValidator);
 
 
 
@@ -43,23 +60,24 @@ public class MyProject1 {
 
         commandStack.push(command);
         commandQueue.offer(command);
+
         try {
           switch (command) {
 
             case "1" :   
-              adminHandler.add();
+              adminAdd.service();
               break;
             case "2" :  
-              existHandler.service();
+              existingMenu.service();
               break;
             case "3" :  
-              checkHandler.list();
+              check.service();
               break;
             case "4" :  
-              boardHandler.board();
+              boardMenu.service();
               break;          
             case "5" :
-              adminHandler.service();
+              adminMenu.service();
               break;
             case "h1" :
               printCommandHistory(commandStack.iterator());
