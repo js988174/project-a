@@ -1,5 +1,5 @@
 package com.kim.pms.features;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import com.kim.pms.domain.Admin1;
 import com.kim.util.Prompt;
@@ -11,7 +11,7 @@ public class AdminMenu extends AbstractAdminHandler{
     super(adminList);
   }
 
-  ArrayList<Admin1> adminList = new ArrayList<>();
+  LinkedList<Admin1> adminList = new LinkedList<>(); 
   AdminList adminList1 = new AdminList(adminList);
   AdminDetail adminDetail = new AdminDetail(adminList);
   AdminUpdate adminUpdate = new AdminUpdate(adminList);

@@ -4,15 +4,17 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
-public class Check implements Command {
+public class Check extends AbstractExistingHandler {
   // 출석 체크를 하면 회원 이름과 시간 락커룸 신청 (랜덤 중복 안되게)  언제 왔는지 나타나게 하기
 
 
   private AdminValidator adminValidator;
 
-  public Check(AdminValidator adminValidator) {
+  public Check(List<Existing> checkList, AdminValidator adminValidator) {
+    super(checkList);
     this.adminValidator = adminValidator;
   }
 

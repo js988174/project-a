@@ -34,12 +34,13 @@ public class MyProject1 {
     // 기존 회원 메뉴
     ArrayList<Existing> existList = new ArrayList<>();
     // 출석 체크 메뉴
-    Check check = new Check(adminValidator);
+    ArrayList<Existing> checkList = new ArrayList<>();
+
 
     HashMap<String,Command> commandMap = new HashMap<>();
     commandMap.put("1", new AdminAdd(adminList));
     commandMap.put("2", new ExistingMenu(existList, adminValidator));
-    commandMap.put("3", new Check(adminValidator));
+    commandMap.put("3", new Check(checkList, adminValidator));
     commandMap.put("4", new BoardMenu(boardList));
     commandMap.put("5", new AdminMenu(adminList));
 
