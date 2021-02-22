@@ -25,9 +25,7 @@ public class AdminAdd extends AbstractAdminHandler {
     m.setPhone(Prompt.inputString("전화 번호: "));
     m.setAdress(Prompt.inputString("주소: "));
     m.setBirth(Prompt.inputString("생년 월일: "));
-    m.setJob(Prompt.inputString("직업: "));
     m.setGender(Prompt.inputString("성별: "));
-    m.setEmail(Prompt.inputString("이메일: "));
     m.setNow(new java.sql.Date(System.currentTimeMillis()));
     m.setStatus(Prompt.inputInt("등록기간:\n0: 3개월[5만원]\n1: 6개월[8만원]\n2: 12개월[15만원]\n>"));
 

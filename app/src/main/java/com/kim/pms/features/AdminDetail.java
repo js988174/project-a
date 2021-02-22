@@ -25,18 +25,14 @@ public class AdminDetail extends AbstractAdminHandler{
       return;
     }
 
-    System.out.println();
-    System.out.printf("id: s\n" , m.getId());
-    System.out.printf("회원 이름: s\n" , m.getName());
-    System.out.printf("전화 번호: s\n" , m.getPhone());
-    System.out.printf("주소: s\n" , m.getAdress()); 
-    System.out.printf("생년 월일: s\n" , m.getBirth());
-    System.out.printf("직업: s\n" , m.getJob());
-    System.out.printf("성별: s\n" , m.getGender());
-    System.out.printf("이메일: s\n" , m.getEmail());
-    System.out.printf("가입일: s\n" , m.getNow());   
-    System.out.printf("등록 기간: s\n" , m.getStatus());
-
+    System.out.println("=====================================================================================");
+    System.out.println("회원 ID\t 회원 이름\t전화번호\t 주소 \t\t생년월일\t  성별 ");
+    System.out.println("=====================================================================================");
+    System.out.printf(" %s  %4s   %9s  %11s%12s %10s\n"
+        ,  m.getId(), m.getName(), m.getPhone(), m.getAdress(),m.getBirth(),m.getGender());
+    System.out.println("=====================================================================================");      
+    System.out.println("등록 날짜\t등록 기간");
+    System.out.printf(" %7s  %5s\n", m.getNow(), m.getStatus() );
 
   }
 

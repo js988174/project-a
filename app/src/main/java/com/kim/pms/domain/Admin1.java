@@ -8,9 +8,7 @@ public class Admin1 {
   private String phone;
   private String adress;
   private String birth;
-  private String job;
   private String gender;
-  private String email;
   private Date now;
   private int status;
 
@@ -22,10 +20,8 @@ public class Admin1 {
     int result = 1;
     result = prime * result + ((adress == null) ? 0 : adress.hashCode());
     result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-    result = prime * result + ((email == null) ? 0 : email.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((job == null) ? 0 : job.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + ((now == null) ? 0 : now.hashCode());
     result = prime * result + ((phone == null) ? 0 : phone.hashCode());
@@ -50,12 +46,7 @@ public class Admin1 {
       if (other.birth != null)
         return false;
     } else if (!birth.equals(other.birth))
-      return false;
-    if (email == null) {
-      if (other.email != null)
-        return false;
-    } else if (!email.equals(other.email))
-      return false;
+      return false;    
     if (gender == null) {
       if (other.gender != null)
         return false;
@@ -65,11 +56,6 @@ public class Admin1 {
       if (other.id != null)
         return false;
     } else if (!id.equals(other.id))
-      return false;
-    if (job == null) {
-      if (other.job != null)
-        return false;
-    } else if (!job.equals(other.job))
       return false;
     if (name == null) {
       if (other.name != null)
@@ -120,23 +106,11 @@ public class Admin1 {
   public void setBirth(String birth) {
     this.birth = birth;
   }
-  public String getJob() {
-    return job;
-  }
-  public void setJob(String job) {
-    this.job = job;
-  }
   public String getGender() {
     return gender;
   }
   public void setGender(String gender) {
     this.gender = gender;
-  }
-  public String getEmail() {
-    return email;
-  }
-  public void setEmail(String email) {
-    this.email = email;
   }
   public Date getNow() {
     return now;
