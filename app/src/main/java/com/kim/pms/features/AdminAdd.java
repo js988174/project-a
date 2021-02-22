@@ -1,5 +1,4 @@
 package com.kim.pms.features;
-import java.util.LinkedList;
 import java.util.List;
 import com.kim.pms.domain.Admin1;
 import com.kim.util.Prompt;
@@ -9,9 +8,6 @@ public class AdminAdd extends AbstractAdminHandler {
   public AdminAdd(List<Admin1> adminList) {
     super(adminList);
   }
-
-
-  public LinkedList<Admin1> adminList = new LinkedList<>();
 
 
   @Override

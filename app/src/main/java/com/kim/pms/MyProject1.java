@@ -2,6 +2,7 @@ package com.kim.pms;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import com.kim.pms.domain.Admin1;
@@ -12,6 +13,7 @@ import com.kim.pms.features.AdminMenu;
 import com.kim.pms.features.AdminValidator;
 import com.kim.pms.features.BoardMenu;
 import com.kim.pms.features.Check;
+import com.kim.pms.features.Command;
 import com.kim.pms.features.ExistingMenu;
 import com.kim.util.Prompt;
 
@@ -25,22 +27,21 @@ public class MyProject1 {
 
 
     // 게시판 메뉴
-    ArrayList<Board> boardList = new ArrayList<>();
-    BoardMenu boardMenu = new BoardMenu(boardList);
-
+    ArrayList<Board> boardList = new ArrayList<>(); 
     // 관리자 메뉴
-    ArrayList<Admin1> adminList = new ArrayList<>();
-    AdminAdd adminAdd = new AdminAdd(adminList);
-    AdminMenu adminMenu = new AdminMenu(adminList);
+    LinkedList<Admin1> adminList = new LinkedList<>(); 
     AdminValidator adminValidator = new AdminValidator(adminList);
-
-
     // 기존 회원 메뉴
     ArrayList<Existing> existList = new ArrayList<>();
-    ExistingMenu existingMenu = new ExistingMenu(existList, adminValidator);  
-
-    // 출석 체크
+    // 출석 체크 메뉴
     Check check = new Check(adminValidator);
+
+    HashMap<String,Command> commandMap = new HashMap<>();
+    commandMap.put("1", new AdminAdd(adminList));
+    commandMap.put("2", new ExistingMenu(existList, adminValidator));
+    commandMap.put("3", new Check(adminValidator));
+    commandMap.put("4", new BoardMenu(boardList));
+    commandMap.put("5", new AdminMenu(adminList));
 
 
 
@@ -64,21 +65,6 @@ public class MyProject1 {
         try {
           switch (command) {
 
-            case "1" :   
-              adminAdd.service();
-              break;
-            case "2" :  
-              existingMenu.service();
-              break;
-            case "3" :  
-              check.service();
-              break;
-            case "4" :  
-              boardMenu.service();
-              break;          
-            case "5" :
-              adminMenu.service();
-              break;
             case "h1" :
               printCommandHistory(commandStack.iterator());
               break;
@@ -90,9 +76,14 @@ public class MyProject1 {
               break loop;
 
             default :
+              Command commandHandler = commandMap.get(command);
               System.out.println();
-              System.out.println("잘못 입력하셨습니다. ");
-              System.out.println("다시 입력해주세요. ");
+              if (commandHandler == null) {
+                System.out.println("잘못 입력하셨습니다. ");
+                System.out.println("다시 입력해주세요. ");
+              } else {
+                commandHandler.service();
+              }
               System.out.println();
           }
         } catch (Exception e) {

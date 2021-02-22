@@ -12,7 +12,7 @@ public abstract class AbstractBoardHandler implements Command {
   }
 
   protected Board findByNo(int boardNo) {
-    Board[] list = boardList.toArray(new Board[0]);
+    Board[] list = boardList.toArray(new Board[boardList.size()]);
     for (Object obj : list) {
       Board b = (Board) obj;
       if (b.getNo() == boardNo) {
