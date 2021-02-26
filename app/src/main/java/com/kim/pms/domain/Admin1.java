@@ -1,8 +1,11 @@
 package com.kim.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Admin1 {
+public class Admin1 implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private String id;
   private String name;
   private String phone;

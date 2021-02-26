@@ -9,6 +9,7 @@ public class AdminMenu extends AbstractAdminHandler{
 
   public AdminMenu(List<Admin1> adminList ) {
     super(adminList);
+
   }
 
   LinkedList<Admin1> adminList = new LinkedList<>(); 

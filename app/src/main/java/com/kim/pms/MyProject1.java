@@ -1,10 +1,19 @@
 package com.kim.pms;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import com.kim.pms.domain.Admin1;
 import com.kim.pms.domain.Board;
 import com.kim.pms.domain.Existing;
@@ -23,19 +32,26 @@ public class MyProject1 {
   static LinkedList<String> commandQueue = new LinkedList<>();
 
 
+  static  List<Board> boardList; 
+  static  List<Admin1> adminList; 
+  static List<Existing> existList;
+  static List<Existing> checkList;
+
+  static File boardFile = new File("boards.data");
+  static File adminFile = new File("admins.data");
+  static File existFile = new File("exists.data");
+  static File checkFile = new File("checks.data");
+
+
   public static void main(String[] args) throws CloneNotSupportedException {
 
+    boardList = loadObjects(boardFile, Board.class);
+    adminList = loadObjects(adminFile, Admin1.class);
+    existList = loadObjects(existFile, Existing.class);
+    checkList = loadObjects(checkFile, Existing.class);
 
-    // 게시판 메뉴
-    ArrayList<Board> boardList = new ArrayList<>(); 
-    // 관리자 메뉴
-    LinkedList<Admin1> adminList = new LinkedList<>(); 
+
     AdminValidator adminValidator = new AdminValidator(adminList);
-    // 기존 회원 메뉴
-    ArrayList<Existing> existList = new ArrayList<>();
-    // 출석 체크 메뉴
-    ArrayList<Existing> checkList = new ArrayList<>();
-
 
     HashMap<String,Command> commandMap = new HashMap<>();
     commandMap.put("1", new AdminAdd(adminList));
@@ -94,6 +110,10 @@ public class MyProject1 {
         }
         System.out.println();
       }
+    saveObjects(boardFile, boardList);
+    saveObjects(adminFile, adminList);
+    saveObjects(existFile, existList);
+    saveObjects(checkFile, checkList);
 
     Prompt.close();
   }
@@ -108,6 +128,34 @@ public class MyProject1 {
           break;
         }
       }
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends Serializable> List<T> loadObjects(File file, Class<T> dataType) {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new BufferedInputStream(
+            new FileInputStream(file)))) {
+
+      System.out.printf("파일 %s 로딩\n", file.getName());
+      return (List<T>) in.readObject();
+
+
+
+    } catch (Exception e) {
+      System.out.printf("파일 %s 로딩중 오류 발생\n", file.getName());
+      return new ArrayList<T>();
+    }
+  }
+  public static <T extends Serializable> void saveObjects(File file, List<T> dataList ) {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new BufferedOutputStream(
+            new FileOutputStream(file)))) {
+
+      out.writeObject(dataList);
+      System.out.printf("파일 % 저장\n", file.getName());
+    } catch (Exception e) {
+      System.out.printf("파일 % 저장중 오류 발생\n", file.getName());
     }
   }
 }

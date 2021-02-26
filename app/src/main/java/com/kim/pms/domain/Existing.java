@@ -1,6 +1,10 @@
 package com.kim.pms.domain;
 
-public class Existing {
+import java.io.Serializable;
+
+public class Existing implements Serializable{
+  private static final long serialVersionUID = 1L;
+
   private String ID1;
   private int status;
   private int number;

@@ -35,7 +35,8 @@ public class Check extends AbstractExistingHandler {
       String input = Prompt.inputString("입장 하시겠습니까?(y/n)");
       System.out.println();
       if (input.equalsIgnoreCase("y")) {     
-        System.out.println("회원님 반갑습니다.");     
+        System.out.println("회원님 반갑습니다.");  
+        System.out.println();
         System.out.println("입장시간 >");
 
         Calendar cal = Calendar.getInstance();
@@ -52,7 +53,7 @@ public class Check extends AbstractExistingHandler {
         System.out.println("\t" + "\t" + "[회원 출석 정보]");
         int year = 2021;
         int month = 2;
-        System.out.println( "\t" + "\t" + "[ " + year + "년 " + month + "월" + " ]" );
+        System.out.println( "\t" + "\t" + "[ " + year +  " 년 " + month + "월" + "  ]" );
         System.out.println("-------------------------------------------------------");
         System.out.println("월\t화\t수\t목\t금\t토\t일");
         GregorianCalendar calendar = new GregorianCalendar(year,(month - 1), 1);
