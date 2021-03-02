@@ -52,7 +52,7 @@ public class Check extends AbstractExistingHandler {
         System.out.println();
         System.out.println("\t" + "\t" + "[회원 출석 정보]");
         int year = 2021;
-        int month = 2;
+        int month = 3;
         System.out.println( "\t" + "\t" + "[ " + year +  " 년 " + month + "월" + "  ]" );
         System.out.println("-------------------------------------------------------");
         System.out.println("월\t화\t수\t목\t금\t토\t일");

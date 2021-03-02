@@ -1,13 +1,10 @@
 package com.kim.pms;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +21,8 @@ import com.kim.pms.features.BoardMenu;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.Command;
 import com.kim.pms.features.ExistingMenu;
+import com.kim.util.CsvObject;
+import com.kim.util.ObjectFactory;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
@@ -32,28 +31,28 @@ public class MyProject1 {
   static LinkedList<String> commandQueue = new LinkedList<>();
 
 
-  static  List<Board> boardList; 
-  static  List<Admin1> adminList; 
-  static List<Existing> existList;
+  public static ArrayList<Board> boardList = new ArrayList<>();
+  public static LinkedList<Admin1> adminList = new LinkedList<>(); 
+  public static LinkedList<Existing> existList = new LinkedList<>();
   static List<Existing> checkList;
 
-  static File boardFile = new File("boards.data");
-  static File adminFile = new File("admins.data");
-  static File existFile = new File("exists.data");
-  static File checkFile = new File("checks.data");
+  static File boardFile = new File("boards.csv");
+  static File adminFile = new File("admins.csv");
+  static File existFile = new File("exists.csv");
+  static File checkFile = new File("checks.csv");
 
 
   public static void main(String[] args) throws CloneNotSupportedException {
 
-    boardList = loadObjects(boardFile, Board.class);
-    adminList = loadObjects(adminFile, Admin1.class);
-    existList = loadObjects(existFile, Existing.class);
-    checkList = loadObjects(checkFile, Existing.class);
+    loadObjects(boardFile, boardList, Board::new);
+    loadObjects(adminFile, adminList, Admin1::new);
+    loadObjects(existFile, existList, Existing::new);
+    loadObjects(checkFile, checkList, Existing::new);
 
+    HashMap<String,Command> commandMap = new HashMap<>();
 
     AdminValidator adminValidator = new AdminValidator(adminList);
 
-    HashMap<String,Command> commandMap = new HashMap<>();
     commandMap.put("1", new AdminAdd(adminList));
     commandMap.put("2", new ExistingMenu(existList, adminValidator));
     commandMap.put("3", new Check(checkList, adminValidator));
@@ -131,28 +130,25 @@ public class MyProject1 {
     }
   }
 
-  @SuppressWarnings("unchecked")
-  public static <T extends Serializable> List<T> loadObjects(File file, Class<T> dataType) {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(
-            new FileInputStream(file)))) {
 
+  static <T> void loadObjects(File file, List<T> list, ObjectFactory<T> objFactory) {
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+      String csvStr = null;
+      while ((csvStr = in.readLine()) != null) {
+        list.add(objFactory.create(csvStr));
+      }
       System.out.printf("파일 %s 로딩\n", file.getName());
-      return (List<T>) in.readObject();
-
-
-
     } catch (Exception e) {
       System.out.printf("파일 %s 로딩중 오류 발생\n", file.getName());
-      return new ArrayList<T>();
+
     }
   }
-  public static <T extends Serializable> void saveObjects(File file, List<T> dataList ) {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(
-            new FileOutputStream(file)))) {
 
-      out.writeObject(dataList);
+  static <T extends CsvObject> void saveObjects(File file, List<T> list ) {
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+      for (CsvObject csvObj : list) {
+        out.write(csvObj.toString() + "/n");
+      }
       System.out.printf("파일 % 저장\n", file.getName());
     } catch (Exception e) {
       System.out.printf("파일 % 저장중 오류 발생\n", file.getName());

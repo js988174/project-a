@@ -1,7 +1,6 @@
 package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
-import java.util.ArrayList;
 import java.util.List;
 import com.kim.pms.domain.Board;
 import com.kim.util.Prompt;
@@ -12,7 +11,7 @@ public class BoardMenu extends AbstractBoardHandler {
     super(boardList);
   }
 
-  ArrayList<Board> boardList = new ArrayList<>();
+
   BoardAdd boardAdd = new BoardAdd(boardList);
   BoardList boardList1 = new BoardList(boardList);
   BoardDetail boardDetail = new BoardDetail(boardList);

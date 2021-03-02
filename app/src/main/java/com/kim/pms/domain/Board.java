@@ -1,10 +1,10 @@
 package com.kim.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
+import com.kim.util.CsvObject;
 
-public class Board implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class Board implements CsvObject {
+
 
   private int no;
   private String title;
@@ -13,7 +13,40 @@ public class Board implements Serializable {
   private Date now;
   private int viewCount;
 
+  public Board() {}
 
+  public Board(String csv) {
+    String[] fields = csv.split(",");
+    this.setNo(Integer.parseInt(fields[0]));
+    this.setTitle((fields[0]));
+    this.setContent((fields[0]));
+    this.setWriter((fields[0]));
+    this.setNow(Date.valueOf(fields[0]));
+    this.setViewCount(Integer.parseInt(fields[0]));
+  }
+
+  public String toCvsString() {
+    return String.format("%d,%s,%s,%s,%s,%d",
+        this.getNo(),
+        this.getTitle(),
+        this.getContent(),
+        this.getWriter(),
+        this.getNow(),
+        this.getViewCount());
+  }
+
+  public static Board valueOfCsv(String csv) {
+    String[] fields = csv.split(",");
+    Board b = new Board();
+    b.setNo(Integer.parseInt(fields[0]));
+    b.setTitle((fields[0]));
+    b.setContent((fields[0]));
+    b.setWriter((fields[0]));
+    b.setNow(Date.valueOf(fields[0]));
+    b.setViewCount(Integer.parseInt(fields[0]));
+
+    return b;
+  }
 
   @Override
   public int hashCode() {
@@ -97,6 +130,12 @@ public class Board implements Serializable {
   }
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
+  }
+
+  @Override
+  public String toCsvString() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 

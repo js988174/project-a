@@ -1,14 +1,40 @@
 package com.kim.pms.domain;
 
-import java.io.Serializable;
+import com.kim.util.CsvObject;
 
-public class Existing implements Serializable{
-  private static final long serialVersionUID = 1L;
+public class Existing implements CsvObject{
+
 
   private String ID1;
   private int status;
   private int number;
   private int status1;
+
+  public Existing() {}
+
+  public Existing(String csv) {
+    String[] fields = csv.split(","); 
+    this.setID1(fields[0]);
+    this.setStatus(Integer.parseInt(fields[1]));
+    this.setStatus1(Integer.parseInt(fields[1]));
+  }
+
+  @Override
+  public String toCsvString() {
+    return String.format("%s,%d,%d",
+        this.getID1(),
+        this.getStatus(),
+        this.getStatus1());
+  }
+
+  public static Existing valueOfCsv(String csv) {
+    String[] fields = csv.split(","); 
+    Existing e = new Existing();
+    e.setID1(fields[0]);
+    e.setStatus(Integer.parseInt(fields[1]));
+    e.setStatus1(Integer.parseInt(fields[1]));
+    return e;
+  }
 
   @Override
   public int hashCode() {

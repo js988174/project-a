@@ -6,14 +6,14 @@ import com.kim.pms.domain.Existing;
 public abstract class AbstractExistingHandler implements Command{
 
 
-  protected List<Existing> existingList;
+  protected List<Existing> existList;
 
-  public AbstractExistingHandler(List<Existing> existingList) {
-    this.existingList = existingList;
+  public AbstractExistingHandler(List<Existing> existList) {
+    this.existList = existList;
   }
 
   protected Existing findById(String id) {
-    Existing[] list = existingList.toArray(new Existing[existingList.size()]);
+    Existing[] list = existList.toArray(new Existing[existList.size()]);
     for (Existing m : list) {
       if (m.getID1().equals(id)) {
         return m;

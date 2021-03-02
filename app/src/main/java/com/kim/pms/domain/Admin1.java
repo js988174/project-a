@@ -1,10 +1,10 @@
 package com.kim.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
+import com.kim.util.CsvObject;
 
-public class Admin1 implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class Admin1 implements CsvObject {
+
 
   private String id;
   private String name;
@@ -15,7 +15,46 @@ public class Admin1 implements Serializable {
   private Date now;
   private int status;
 
+  public Admin1() {}
 
+  public Admin1(String csv) {
+    String[] fields = csv.split(",");
+    this.setId(fields[0]);
+    this.setName(fields[1]);
+    this.setPhone(fields[2]);
+    this.setAdress(fields[3]);
+    this.setBirth(fields[4]);
+    this.setGender(fields[5]);
+    this.setNow(Date.valueOf(fields[6]));
+    this.setStatus(Integer.parseInt(fields[7]));
+  }
+
+  @Override
+  public String toCsvString() {
+    return String.format("%s,%s,%s,%s,%s,%s,%s,%d",
+        this.getId(),
+        this.getName(),
+        this.getPhone(),
+        this.getAdress(),
+        this.getBirth(),
+        this.getGender(),
+        this.getNow(),
+        this.getStatus());
+  }
+
+  public static Admin1 valueOfCsv(String csv) {
+    String[] fields = csv.split(",");
+    Admin1 m = new Admin1();
+    m.setId(fields[0]);
+    m.setName(fields[1]);
+    m.setPhone(fields[2]);
+    m.setAdress(fields[3]);
+    m.setBirth(fields[4]);
+    m.setGender(fields[5]);
+    m.setNow(Date.valueOf(fields[6]));
+    m.setStatus(Integer.parseInt(fields[7]));
+    return m;
+  }
 
   @Override
   public int hashCode() {

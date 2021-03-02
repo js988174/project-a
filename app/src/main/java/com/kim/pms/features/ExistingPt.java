@@ -8,8 +8,8 @@ import com.kim.util.Prompt;
 public class ExistingPt  extends AbstractExistingHandler{
 
 
-  public ExistingPt(List<Existing> existingList) {
-    super(existingList);
+  public ExistingPt(List<Existing> existList) {
+    super(existList);
 
   }
 
@@ -27,7 +27,7 @@ public class ExistingPt  extends AbstractExistingHandler{
       System.out.println();
       System.out.println("pt를 신청하셨습니다.");
     }
-    existingList.add(m);
+    existList.add(m);
   }
 
 

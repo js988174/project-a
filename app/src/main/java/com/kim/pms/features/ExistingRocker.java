@@ -9,8 +9,8 @@ import com.kim.util.Prompt;
 public class ExistingRocker extends AbstractExistingHandler {
 
 
-  public ExistingRocker(List<Existing> existingList) {
-    super(existingList);
+  public ExistingRocker(List<Existing> existList) {
+    super(existList);
   }
 
 
@@ -40,7 +40,7 @@ public class ExistingRocker extends AbstractExistingHandler {
         System.out.printf("락커룸 번호: %d\n ", Number[i]);
       }
     }
-    existingList.add(m);
+    existList.add(m);
   }
 
 

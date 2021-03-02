@@ -8,8 +8,8 @@ import com.kim.pms.domain.Existing;
 public class ExistingList extends AbstractExistingHandler{
 
 
-  public ExistingList(List<Existing> existingList) {
-    super(existingList);
+  public ExistingList(List<Existing> existList) {
+    super(existList);
 
   }
 
@@ -17,7 +17,7 @@ public class ExistingList extends AbstractExistingHandler{
   @Override
   public void service() {
 
-    Iterator<Existing> iterator = existingList.iterator();
+    Iterator<Existing> iterator = existList.iterator();
 
     while (iterator.hasNext()) {
       Existing m = iterator.next();

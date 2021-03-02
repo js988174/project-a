@@ -1,6 +1,5 @@
 package com.kim.pms.features;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
@@ -11,12 +10,12 @@ public class ExistingMenu extends AbstractExistingHandler{
 
   private AdminValidator adminValidator;
 
-  public ExistingMenu(List<Existing> existingList ,AdminValidator adminValidator) {
-    super(existingList);
+  public ExistingMenu(List<Existing> existList ,AdminValidator adminValidator) {
+    super(existList);
     this.adminValidator = adminValidator;
   }
 
-  ArrayList<Existing> existList = new ArrayList<>();
+
   ExistingList existList1 = new ExistingList(existList);
   ExistingPt existPt = new ExistingPt(existList);
   ExistingRocker existRocker = new ExistingRocker(existList);

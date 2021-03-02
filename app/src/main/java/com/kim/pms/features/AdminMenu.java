@@ -1,5 +1,4 @@
 package com.kim.pms.features;
-import java.util.LinkedList;
 import java.util.List;
 import com.kim.pms.domain.Admin1;
 import com.kim.util.Prompt;
@@ -12,7 +11,7 @@ public class AdminMenu extends AbstractAdminHandler{
 
   }
 
-  LinkedList<Admin1> adminList = new LinkedList<>(); 
+
   AdminList adminList1 = new AdminList(adminList);
   AdminDetail adminDetail = new AdminDetail(adminList);
   AdminUpdate adminUpdate = new AdminUpdate(adminList);
@@ -58,6 +57,7 @@ public class AdminMenu extends AbstractAdminHandler{
       }      
       System.out.println();
     }
+
   }    
 
 }
