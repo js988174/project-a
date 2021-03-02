@@ -149,9 +149,9 @@ public class MyProject1 {
       for (CsvObject csvObj : list) {
         out.write(csvObj.toString() + "/n");
       }
-      System.out.printf("파일 % 저장\n", file.getName());
+      System.out.printf("파일 %s 저장\n", file.getName());
     } catch (Exception e) {
-      System.out.printf("파일 % 저장중 오류 발생\n", file.getName());
+      System.out.printf("파일 %s 저장중 오류 발생\n", file.getName());
     }
   }
 }
