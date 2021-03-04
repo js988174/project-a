@@ -16,15 +16,17 @@ public class Existing implements CsvObject{
     String[] fields = csv.split(","); 
     this.setID1(fields[0]);
     this.setStatus(Integer.parseInt(fields[1]));
-    this.setStatus1(Integer.parseInt(fields[1]));
+    this.setStatus1(Integer.parseInt(fields[2]));
+    this.setNumber(Integer.parseInt(fields[3]));
   }
 
   @Override
   public String toCsvString() {
-    return String.format("%s,%d,%d",
+    return String.format("%s,%d,%d,%s",
         this.getID1(),
         this.getStatus(),
-        this.getStatus1());
+        this.getStatus1(),
+        this.getNumber());
   }
 
   public static Existing valueOfCsv(String csv) {
