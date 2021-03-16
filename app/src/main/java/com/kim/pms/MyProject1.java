@@ -1,18 +1,16 @@
 package com.kim.pms;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import com.kim.context.ContextListener;
 import com.kim.pms.domain.Admin1;
 import com.kim.pms.domain.Board;
+import com.kim.pms.domain.Check1;
 import com.kim.pms.domain.Existing;
 import com.kim.pms.features.AdminAdd;
 import com.kim.pms.features.AdminMenu;
@@ -21,33 +19,47 @@ import com.kim.pms.features.BoardMenu;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.Command;
 import com.kim.pms.features.ExistingMenu;
-import com.kim.util.CsvObject;
-import com.kim.util.ObjectFactory;
+import com.kim.pms.listener.AppListener;
+import com.kim.pms.listener.FileListener;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
 
-  static ArrayDeque<String> commandStack = new ArrayDeque<>();
+  List<ContextListener> listeners = new ArrayList<>();
+
+  ArrayDeque<String> commandStack = new ArrayDeque<>();
   static LinkedList<String> commandQueue = new LinkedList<>();
 
 
-  public static ArrayList<Board> boardList = new ArrayList<>();
-  public static LinkedList<Admin1> adminList = new LinkedList<>(); 
-  public static LinkedList<Existing> existList = new LinkedList<>();
-  static List<Existing> checkList;
-
-  static File boardFile = new File("boards.csv");
-  static File adminFile = new File("admins.csv");
-  static File existFile = new File("exists.csv");
-  static File checkFile = new File("checks.csv");
+  Map<String,Object> appContext = new HashMap<>();
 
 
-  public static void main(String[] args) throws CloneNotSupportedException {
+  public static void main(String[] args)  {
+    MyProject1 myproject1 = new MyProject1();
 
-    loadObjects(boardFile, boardList, Board::new);
-    loadObjects(adminFile, adminList, Admin1::new);
-    loadObjects(existFile, existList, Existing::new);
-    loadObjects(checkFile, checkList, Existing::new);
+    myproject1.addContextListener(new AppListener());
+
+    myproject1.addContextListener(new FileListener());
+
+    myproject1.service();
+  }
+
+  public void addContextListener(ContextListener listener) {
+    listeners.add(listener);
+  }
+  public void removeContextListener(ContextListener listener) {
+    listeners.remove(listener);
+  }
+
+
+  @SuppressWarnings("unchecked")
+  public void service() {
+    ServiceStart();
+
+    List<Board> boardList = (List<Board>) appContext.get("boardList");
+    List<Admin1> adminList = (List<Admin1>) appContext.get("adminList");
+    List<Existing> existList = (List<Existing>) appContext.get("existList");
+    List<Check1> checkList = (List<Check1>) appContext.get("checkList");
 
     HashMap<String,Command> commandMap = new HashMap<>();
 
@@ -63,6 +75,7 @@ public class MyProject1 {
 
     loop:
       while(true) {
+        System.out.println();
         System.out.println("[ 헬스장 관리 프로그램 ]");
         System.out.println("[1] 신규 회원 [2] 기존 회원 ");
         System.out.println("[3] 출석 체크 ");
@@ -109,12 +122,21 @@ public class MyProject1 {
         }
         System.out.println();
       }
-    saveObjects(boardFile, boardList);
-    saveObjects(adminFile, adminList);
-    saveObjects(existFile, existList);
-    saveObjects(checkFile, checkList);
 
     Prompt.close();
+    ServiceEnd();
+  }
+
+  private void ServiceStart() {
+    for (ContextListener listener : listeners) {
+      listener.contextStart(appContext);
+    }
+  }
+
+  private void ServiceEnd() {
+    for (ContextListener listener : listeners) {
+      listener.contextEnd(appContext);
+    }
   }
 
   static void printCommandHistory(Iterator<String> iterator) {
@@ -131,27 +153,5 @@ public class MyProject1 {
   }
 
 
-  static <T> void loadObjects(File file, List<T> list, ObjectFactory<T> objFactory) {
-    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-      String csvStr = null;
-      while ((csvStr = in.readLine()) != null) {
-        list.add(objFactory.create(csvStr));
-      }
-      System.out.printf("파일 %s 로딩\n", file.getName());
-    } catch (Exception e) {
-      System.out.printf("파일 %s 로딩중 오류 발생\n", file.getName());
 
-    }
-  }
-
-  static <T extends CsvObject> void saveObjects(File file, List<T> list ) {
-    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-      for (CsvObject csvObj : list) {
-        out.write(csvObj.toString() + "/n");
-      }
-      System.out.printf("파일 %s 저장\n", file.getName());
-    } catch (Exception e) {
-      System.out.printf("파일 %s 저장중 오류 발생\n", file.getName());
-    }
-  }
 }

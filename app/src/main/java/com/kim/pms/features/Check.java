@@ -5,27 +5,27 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import com.kim.pms.domain.Existing;
+import com.kim.pms.domain.Check1;
 import com.kim.util.Prompt;
-public class Check extends AbstractExistingHandler {
+
+public class Check extends AbstractCheckHandler {
   // 출석 체크를 하면 회원 이름과 시간 락커룸 신청 (랜덤 중복 안되게)  언제 왔는지 나타나게 하기
 
 
   private AdminValidator adminValidator;
 
-  public Check(List<Existing> checkList, AdminValidator adminValidator) {
+  public Check(List<Check1> checkList, AdminValidator adminValidator) {
     super(checkList);
     this.adminValidator = adminValidator;
   }
 
-  @Override
   public void service() {
-    Existing m = new Existing();
+    Check1 c = new Check1();
     while (true) {
       System.out.println();
       System.out.println("===========출석 체크=============");
-      m.setID1(adminValidator.inputMember("ID: (취소: 빈 문자열): "));
-      if (m.getID1() == null) {
+      c.setID1(adminValidator.inputMember("ID: (취소: 빈 문자열): "));
+      if (c.getID1() == null) {
         System.out.println("아이디 입력을 취소합니다.");
         return;
       }

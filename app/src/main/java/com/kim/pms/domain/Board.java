@@ -18,14 +18,21 @@ public class Board implements CsvObject {
   public Board(String csv) {
     String[] fields = csv.split(",");
     this.setNo(Integer.parseInt(fields[0]));
-    this.setTitle((fields[0]));
-    this.setContent((fields[0]));
-    this.setWriter((fields[0]));
-    this.setNow(Date.valueOf(fields[0]));
-    this.setViewCount(Integer.parseInt(fields[0]));
+    this.setTitle((fields[1]));
+    this.setContent((fields[2]));
+    this.setWriter((fields[3]));
+    this.setNow(Date.valueOf(fields[4]));
+    this.setViewCount(Integer.parseInt(fields[5]));
   }
 
-  public String toCvsString() {
+  @Override
+  public String toString() {
+    return "Board [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer
+        + ", now=" + now + ", viewCount=" + viewCount + "]";
+  }
+
+  @Override
+  public String toCsvString() {
     return String.format("%d,%s,%s,%s,%s,%d",
         this.getNo(),
         this.getTitle(),
@@ -39,11 +46,11 @@ public class Board implements CsvObject {
     String[] fields = csv.split(",");
     Board b = new Board();
     b.setNo(Integer.parseInt(fields[0]));
-    b.setTitle((fields[0]));
-    b.setContent((fields[0]));
-    b.setWriter((fields[0]));
-    b.setNow(Date.valueOf(fields[0]));
-    b.setViewCount(Integer.parseInt(fields[0]));
+    b.setTitle((fields[1]));
+    b.setContent((fields[2]));
+    b.setWriter((fields[3]));
+    b.setNow(Date.valueOf(fields[4]));
+    b.setViewCount(Integer.parseInt(fields[5]));
 
     return b;
   }
@@ -131,12 +138,5 @@ public class Board implements CsvObject {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
-  @Override
-  public String toCsvString() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
 
 }

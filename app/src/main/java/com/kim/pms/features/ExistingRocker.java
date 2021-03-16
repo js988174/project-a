@@ -22,7 +22,7 @@ public class ExistingRocker extends AbstractExistingHandler {
     String input = Prompt.inputString("락커룸 신청(y/n)");
 
     if (input.equalsIgnoreCase("y")) {
-      m.setStatus1(Prompt.inputInt("\n0: 3개월 [1만원]\n1: 6개월 [5.5만원]\n2: 12개월 [10만원]\n "
+      m.setStatus2(Prompt.inputInt("\n0: 3개월 [1만원]\n1: 6개월 [5.5만원]\n2: 12개월 [10만원]\n "
           + "락커룸 신청 :"));
       int Number[] = new int[1];
       Random r = new Random();
