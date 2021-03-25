@@ -1,14 +1,12 @@
 package com.kim.pms.domain;
 
-import com.kim.util.CsvObject;
-
-public class Existing implements CsvObject{
+public class Existing {
 
 
   private String ID1;
   private int status1;
   private String number;
-  private int status2;
+  private String status2;
 
   public Existing() {}
 
@@ -16,11 +14,10 @@ public class Existing implements CsvObject{
     String[] fields = csv.split(","); 
     this.setID1(fields[0]);
     this.setStatus1(Integer.parseInt(fields[1]));
-    this.setStatus2(Integer.parseInt(fields[2]));
+    this.setStatus2(fields[2]);
     this.setNumber(fields[3]);
   }
 
-  @Override
   public String toCsvString() {
     return String.format("%s,%d,%d,%s",
         this.getID1(),
@@ -34,10 +31,12 @@ public class Existing implements CsvObject{
     Existing e = new Existing();
     e.setID1(fields[0]);
     e.setStatus1(Integer.parseInt(fields[1]));
-    e.setStatus2(Integer.parseInt(fields[2]));
+    e.setStatus2(fields[2]);
     e.setNumber(fields[3]);
     return e;
   }
+
+
 
   @Override
   public int hashCode() {
@@ -46,7 +45,7 @@ public class Existing implements CsvObject{
     result = prime * result + ((ID1 == null) ? 0 : ID1.hashCode());
     result = prime * result + ((number == null) ? 0 : number.hashCode());
     result = prime * result + status1;
-    result = prime * result + status2;
+    result = prime * result + ((status2 == null) ? 0 : status2.hashCode());
     return result;
   }
 
@@ -73,7 +72,10 @@ public class Existing implements CsvObject{
       return false;
     if (status1 != other.status1)
       return false;
-    if (status2 != other.status2)
+    if (status2 == null) {
+      if (other.status2 != null)
+        return false;
+    } else if (!status2.equals(other.status2))
       return false;
     return true;
   }
@@ -102,11 +104,11 @@ public class Existing implements CsvObject{
     this.number = number;
   }
 
-  public int getStatus2() {
+  public String getStatus2() {
     return status2;
   }
 
-  public void setStatus2(int status2) {
+  public void setStatus2(String status2) {
     this.status2 = status2;
   }
 

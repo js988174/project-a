@@ -1,9 +1,8 @@
 package com.kim.pms.domain;
 
 import java.sql.Date;
-import com.kim.util.CsvObject;
 
-public class Admin1 implements CsvObject {
+public class Admin1  {
 
 
   private String id;
@@ -29,7 +28,7 @@ public class Admin1 implements CsvObject {
     this.setStatus(Integer.parseInt(fields[7]));
   }
 
-  @Override
+
   public String toCsvString() {
     return String.format("%s,%s,%s,%s,%s,%s,%s,%d",
         this.getId(),

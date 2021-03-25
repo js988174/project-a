@@ -1,9 +1,8 @@
 package com.kim.pms.domain;
 
 import java.sql.Date;
-import com.kim.util.CsvObject;
 
-public class Board implements CsvObject {
+public class Board  {
 
 
   private int no;
@@ -31,7 +30,7 @@ public class Board implements CsvObject {
         + ", now=" + now + ", viewCount=" + viewCount + "]";
   }
 
-  @Override
+
   public String toCsvString() {
     return String.format("%d,%s,%s,%s,%s,%d",
         this.getNo(),

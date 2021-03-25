@@ -1,43 +1,58 @@
 package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import com.kim.pms.domain.Board;
 import com.kim.util.Prompt;
 
-public class BoardUpdate extends AbstractBoardHandler {
+public class BoardUpdate implements Command {
 
-
-  public BoardUpdate(List<Board> boardList) {
-    super(boardList);
-
-  }
 
   @Override
-  public void service() {
+  public void service() throws Exception{
     System.out.println("게시글 변경");
 
     int no = Prompt.inputInt("번호: ");
 
-    Board board = findByNo(no);
-    if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-    String title = Prompt.inputString(String.format("제목(%s):", board.getTitle()));
-    String content = Prompt.inputString(String.format("내용(%s):", board.getContent()));
+    try (Connection con = DriverManager.getConnection( 
+        "jdbc:mysql://localhost:3306/myproject?user=root&password=1111");
+        PreparedStatement stmt = con.prepareStatement( 
+            "select no,title,content from kim_board where no=?");
+        PreparedStatement stmt2 = con.prepareStatement( 
+            "update kim_board set title=?, content=? where no=?")) {
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/n)");
+      Board board = new Board();
 
-    if( input.equalsIgnoreCase("y")) {
-      board.setTitle(title);
-      board.setContent(content);
-      System.out.println("게시글을 변경하였습니다.");
-    }else {
-      System.out.println("게시글 변경을 취소하였습니다.");
+      stmt.setInt(1, no);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          System.out.println(".해당 번호의 게시글이 없습니다.");
+          return;
+        }
+        board.setNo(no);
+        board.setTitle(rs.getString("title"));
+        board.setContent(rs.getString("content"));
+      }
+
+
+      board.setTitle(Prompt.inputString(String.format("제목(%s):", board.getTitle())));
+      board.setContent(Prompt.inputString(String.format("내용(%s):", board.getContent())));
+
+      String input = Prompt.inputString("정말 변경하시겠습니까?(y/n)");
+
+      if(!input.equalsIgnoreCase("y")) {
+        System.out.println("게시글 변경을 취소하였습니다.");
+        return;
+      }
+      stmt2.setString(1, board.getTitle());
+      stmt2.setString(2, board.getContent());
+      stmt2.setInt(3, board.getNo());
+      stmt2.executeUpdate();
     }
   }
-
 }
 
 

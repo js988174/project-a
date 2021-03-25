@@ -1,8 +1,6 @@
 package com.kim.pms.domain;
 
-import com.kim.util.CsvObject;
-
-public class Check1 implements CsvObject{
+public class Check1 {
   private String ID1;
 
   public Check1 () {} 
@@ -12,7 +10,6 @@ public class Check1 implements CsvObject{
     this.setID1(fields[0]);
   }
 
-  @Override
   public String toCsvString() {
     return String.format("%s",
         this.getID1());

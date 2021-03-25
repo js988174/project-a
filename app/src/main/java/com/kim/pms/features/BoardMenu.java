@@ -1,25 +1,19 @@
 package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
-import java.util.List;
-import com.kim.pms.domain.Board;
 import com.kim.util.Prompt;
 
-public class BoardMenu extends AbstractBoardHandler {
-
-  public BoardMenu(List<Board> boardList) {
-    super(boardList);
-  }
+public class BoardMenu implements Command {
 
 
-  BoardAdd boardAdd = new BoardAdd(boardList);
-  BoardList boardList1 = new BoardList(boardList);
-  BoardDetail boardDetail = new BoardDetail(boardList);
-  BoardUpdate boardUpdate = new BoardUpdate(boardList);
-  BoardDelete boardDelete = new BoardDelete(boardList);
+  BoardAdd boardAdd = new BoardAdd();
+  BoardList boardList1 = new BoardList();
+  BoardDetail boardDetail = new BoardDetail();
+  BoardUpdate boardUpdate = new BoardUpdate();
+  BoardDelete boardDelete = new BoardDelete();
 
   @Override
-  public void service() {
+  public void service() throws Exception {
     while(true) {
       System.out.println();
       System.out.println("===============[게시판]================");

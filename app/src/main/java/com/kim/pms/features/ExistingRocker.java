@@ -19,14 +19,12 @@ public class ExistingRocker extends AbstractExistingHandler {
     Existing m = new Existing();
 
     System.out.println();
-    String input = Prompt.inputString("락커룸 신청(y/n)");
 
-    if (input.equalsIgnoreCase("y")) {
-      m.setStatus2(Prompt.inputInt("\n0: 3개월 [1만원]\n1: 6개월 [5.5만원]\n2: 12개월 [10만원]\n "
-          + "락커룸 신청 :"));
+    m.setStatus2(Prompt.inputString("락커룸 신청(y/n) : 10000원[1개월]"));
+    if (m.getStatus2().equalsIgnoreCase("y")) {   
+
       int Number[] = new int[1];
       Random r = new Random();
-
       for (int i = 0; i < Number.length; i ++) {
         Number[i] = r.nextInt(150)+1;
         for (int j = 0; j < i; j++) {

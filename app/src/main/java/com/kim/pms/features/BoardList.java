@@ -1,37 +1,34 @@
 package com.kim.pms.features;
 // 건의 게시판  번호 제목 글 건의자 
 
-import java.util.Iterator;
-import java.util.List;
-import com.kim.pms.domain.Board;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-public class BoardList extends AbstractBoardHandler {
+public class BoardList implements Command {
 
-  public BoardList(List<Board> boardList) {
-    super(boardList);
-
-  }
 
   @Override
-  public void service()  {
+  public void service() throws Exception {
     System.out.println("[게시글 목록]");
 
-    Iterator<Board> iterator = boardList.iterator();
+    try (Connection con = DriverManager.getConnection( 
+        "jdbc:mysql://localhost:3306/myproejct?user=root&password=1111");
+        PreparedStatement stmt = con.prepareStatement( 
+            "select no,title,writer,cdt,vw_cnt from kim_board order by no desc");
+        ResultSet rs = stmt.executeQuery()) {
 
-    while (iterator.hasNext()) {
-      Board b = iterator.next();
-
-      System.out.printf("%d, %s, %s, %s, %d, %s\n", 
-          b.getNo(), 
-          b.getTitle(), 
-          b.getContent(),
-          b.getWriter(), 
-          b.getViewCount(),
-          b.getNow());
-
+      while (rs.next()) {   
+        System.out.printf("%d, %s, %s, %s, %d\n", 
+            rs.getInt("no"), 
+            rs.getString("title"), 
+            rs.getString("writer"),
+            rs.getDate("cdt"), 
+            rs.getInt("vw_cnt"));
+      }
     }
   }
-
 }
 
 

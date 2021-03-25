@@ -30,17 +30,7 @@ public abstract class AbstractExistingHandler implements Command{
       case 2:
         return "15회 [68만원]";
       default:
-        return "1회 [5만원]";
-    }
-  }
-  protected String getStatus1(int status1) {
-    switch (status1) {
-      case 1:
-        return "6개월 [5.5만원]";
-      case 2:
-        return "12개월 [10만원]";
-      default:
-        return "3개월 [1만원]";
+        return "5회 [25만원]";
     }
   }
 }

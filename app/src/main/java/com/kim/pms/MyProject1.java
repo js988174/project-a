@@ -1,17 +1,9 @@
 package com.kim.pms;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import com.kim.context.ContextListener;
-import com.kim.pms.domain.Admin1;
-import com.kim.pms.domain.Board;
-import com.kim.pms.domain.Check1;
-import com.kim.pms.domain.Existing;
 import com.kim.pms.features.AdminAdd;
 import com.kim.pms.features.AdminMenu;
 import com.kim.pms.features.AdminValidator;
@@ -19,61 +11,52 @@ import com.kim.pms.features.BoardMenu;
 import com.kim.pms.features.Check;
 import com.kim.pms.features.Command;
 import com.kim.pms.features.ExistingMenu;
-import com.kim.pms.listener.AppListener;
-import com.kim.pms.listener.FileListener;
 import com.kim.util.Prompt;
 
 public class MyProject1 {
 
-  List<ContextListener> listeners = new ArrayList<>();
 
   ArrayDeque<String> commandStack = new ArrayDeque<>();
   static LinkedList<String> commandQueue = new LinkedList<>();
 
+  String serverAddress;
+  int port;
 
-  Map<String,Object> appContext = new HashMap<>();
 
 
   public static void main(String[] args)  {
-    MyProject1 myproject1 = new MyProject1();
+    MyProject1 app = new MyProject1("localhost", 8888);
 
-    myproject1.addContextListener(new AppListener());
-
-    myproject1.addContextListener(new FileListener());
-
-    myproject1.service();
+    try {
+      app.execute();
+    } catch (Exception e) {
+      System.out.println("클라이언트 실행중 오류 발생");
+      e.printStackTrace();
+    }
   }
 
-  public void addContextListener(ContextListener listener) {
-    listeners.add(listener);
-  }
-  public void removeContextListener(ContextListener listener) {
-    listeners.remove(listener);
+  public MyProject1(String serverAddress, int port) {
+    this.serverAddress = serverAddress;
+    this.port = port;
   }
 
 
-  @SuppressWarnings("unchecked")
-  public void service() {
-    ServiceStart();
 
-    List<Board> boardList = (List<Board>) appContext.get("boardList");
-    List<Admin1> adminList = (List<Admin1>) appContext.get("adminList");
-    List<Existing> existList = (List<Existing>) appContext.get("existList");
-    List<Check1> checkList = (List<Check1>) appContext.get("checkList");
+  public void execute() throws Exception{
 
     HashMap<String,Command> commandMap = new HashMap<>();
 
-    AdminValidator adminValidator = new AdminValidator(adminList);
+    AdminValidator adminValidator = new AdminValidator();
 
-    commandMap.put("1", new AdminAdd(adminList));
-    commandMap.put("2", new ExistingMenu(existList, adminValidator));
-    commandMap.put("3", new Check(checkList, adminValidator));
-    commandMap.put("4", new BoardMenu(boardList));
-    commandMap.put("5", new AdminMenu(adminList));
+    commandMap.put("1", new AdminAdd());
+    commandMap.put("2", new ExistingMenu( adminValidator));
+    commandMap.put("3", new Check(adminValidator));
+    commandMap.put("4", new BoardMenu());
+    commandMap.put("5", new AdminMenu());
 
 
+    try {
 
-    loop:
       while(true) {
         System.out.println();
         System.out.println("[ 헬스장 관리 프로그램 ]");
@@ -122,24 +105,15 @@ public class MyProject1 {
         }
         System.out.println();
       }
-
+    } catch (Exception e) {
+      System.out.println("서버와 통신 하는 중에 오류 발생!");
+    }
     Prompt.close();
-    ServiceEnd();
+
   }
 
-  private void ServiceStart() {
-    for (ContextListener listener : listeners) {
-      listener.contextStart(appContext);
-    }
-  }
 
-  private void ServiceEnd() {
-    for (ContextListener listener : listeners) {
-      listener.contextEnd(appContext);
-    }
-  }
-
-  static void printCommandHistory(Iterator<String> iterator) {
+  private void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
