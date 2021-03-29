@@ -8,7 +8,7 @@ public class Admin1  {
   private String id;
   private String name;
   private String phone;
-  private String adress;
+  private String address;
   private String birth;
   private String gender;
   private Date now;
@@ -21,20 +21,25 @@ public class Admin1  {
     this.setId(fields[0]);
     this.setName(fields[1]);
     this.setPhone(fields[2]);
-    this.setAdress(fields[3]);
+    this.setAddress(fields[3]);
     this.setBirth(fields[4]);
     this.setGender(fields[5]);
     this.setNow(Date.valueOf(fields[6]));
     this.setStatus(Integer.parseInt(fields[7]));
   }
 
+  @Override
+  public String toString() {
+    return "Admin1 [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address
+        + ", birth=" + birth + ", gender=" + gender + ", now=" + now + ", status=" + status + "]";
+  }
 
   public String toCsvString() {
     return String.format("%s,%s,%s,%s,%s,%s,%s,%d",
         this.getId(),
         this.getName(),
         this.getPhone(),
-        this.getAdress(),
+        this.getAddress(),
         this.getBirth(),
         this.getGender(),
         this.getNow(),
@@ -47,7 +52,7 @@ public class Admin1  {
     m.setId(fields[0]);
     m.setName(fields[1]);
     m.setPhone(fields[2]);
-    m.setAdress(fields[3]);
+    m.setAddress(fields[3]);
     m.setBirth(fields[4]);
     m.setGender(fields[5]);
     m.setNow(Date.valueOf(fields[6]));
@@ -59,7 +64,7 @@ public class Admin1  {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((adress == null) ? 0 : adress.hashCode());
+    result = prime * result + ((address == null) ? 0 : address.hashCode());
     result = prime * result + ((birth == null) ? 0 : birth.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -78,10 +83,10 @@ public class Admin1  {
     if (getClass() != obj.getClass())
       return false;
     Admin1 other = (Admin1) obj;
-    if (adress == null) {
-      if (other.adress != null)
+    if (address == null) {
+      if (other.address != null)
         return false;
-    } else if (!adress.equals(other.adress))
+    } else if (!address.equals(other.address))
       return false;
     if (birth == null) {
       if (other.birth != null)
@@ -135,11 +140,11 @@ public class Admin1  {
   public void setPhone(String phone) {
     this.phone = phone;
   }
-  public String getAdress() {
-    return adress;
+  public String getAddress() {
+    return address;
   }
-  public void setAdress(String adress) {
-    this.adress = adress;
+  public void setAddress(String address) {
+    this.address = address;
   }
   public String getBirth() {
     return birth;
@@ -166,5 +171,15 @@ public class Admin1  {
     this.status = status;
   }
 
+  public static String getStatus(int status) {
+    switch (status) {
+      case 1:
+        return "6개월 신청[8만원]";
+      case 2:
+        return "12개월 신청[15만원]";
+      default:
+        return "3개월 신청[5만원]";
+    }
+  }
 
 }

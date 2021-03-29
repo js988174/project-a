@@ -1,24 +1,17 @@
 package com.kim.pms.features;
-import java.util.List;
-import com.kim.pms.domain.Admin1;
 import com.kim.util.Prompt;
 
-public class AdminMenu extends AbstractAdminHandler{
+public class AdminMenu implements Command{
 
 
-  public AdminMenu(List<Admin1> adminList ) {
-    super(adminList);
 
-  }
-
-
-  AdminList adminList1 = new AdminList(adminList);
-  AdminDetail adminDetail = new AdminDetail(adminList);
-  AdminUpdate adminUpdate = new AdminUpdate(adminList);
-  AdminDelete adminDelete = new AdminDelete(adminList);
+  AdminList adminList1 = new AdminList();
+  AdminDetail adminDetail = new AdminDetail();
+  AdminUpdate adminUpdate = new AdminUpdate();
+  AdminDelete adminDelete = new AdminDelete();
 
   @Override
-  public void service() {
+  public void service() throws Exception {
 
     while(true) {
       System.out.println("===============[관리자]================");

@@ -1,32 +1,33 @@
 package com.kim.pms.features;
 
-import java.util.List;
-import com.kim.pms.domain.Admin1;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import com.kim.util.Prompt;
 
-public class AdminValidator extends AbstractAdminHandler{
+public class AdminValidator {
 
-  public AdminValidator(List<Admin1> adminList) {
-    super(adminList);
 
-  }
 
-  @Override
-  public void service() {
+  public String inputMember(String promptTitle) throws Exception {
 
-  }
+    try (Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/myproject?user=root&password=1111");
+        PreparedStatement stmt = con.prepareStatement(
+            "select id,name from kim_admin where id=?")) {
 
-  public String inputMember(String promptTitle) {
-    while (true) {
-      String id = Prompt.inputString(promptTitle);
-      if (id.length() == 0) {
-        return null;
+
+      while (true) {
+        String id = Prompt.inputString(promptTitle);
+        if (id.length() == 0) {
+          return null;
+        }
+        if (findById(id) != null) {
+          return id;
+        }
+        System.out.println("등록된 회원이 아닙니다.");
+        System.out.println();
       }
-      if (findById(id) != null) {
-        return id;
-      }
-      System.out.println("등록된 회원이 아닙니다.");
-      System.out.println();
     }
   }
   public String inputMembers(String promptTitle) {
