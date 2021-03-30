@@ -25,6 +25,7 @@ public class ExistingList extends AbstractExistingHandler{
       System.out.println();
       System.out.println("[신청 목록]");
       System.out.printf("PT: %s,락커룸 한달: %s\n", getStatus(m.getStatus1()),m.getStatus2());
+
       System.out.println();
     }        
 

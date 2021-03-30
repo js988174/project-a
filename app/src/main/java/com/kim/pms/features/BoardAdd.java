@@ -7,6 +7,12 @@ import java.sql.PreparedStatement;
 import com.kim.pms.domain.Board;
 import com.kim.util.Prompt;
 
+BoardDao boardDao;
+
+public BoardAdd(BoardDao boardDao) {
+  this.boardDao = boardDao;
+}
+
 public class BoardAdd implements Command {
 
 

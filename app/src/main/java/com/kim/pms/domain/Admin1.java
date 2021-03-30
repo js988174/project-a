@@ -171,7 +171,7 @@ public class Admin1  {
     this.status = status;
   }
 
-  public static String getStatus(int status) {
+  public static String getStatusLabel(int status) {
     switch (status) {
       case 1:
         return "6개월 신청[8만원]";

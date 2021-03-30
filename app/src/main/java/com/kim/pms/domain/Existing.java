@@ -112,6 +112,16 @@ public class Existing {
     this.status2 = status2;
   }
 
+  public static String getStatus(int status) {
+    switch (status) {
+      case 1:
+        return "10회 [45만원]";
+      case 2:
+        return "15회 [68만원]";
+      default:
+        return "5회 [25만원]";
+    }
+  }
 
 }
 

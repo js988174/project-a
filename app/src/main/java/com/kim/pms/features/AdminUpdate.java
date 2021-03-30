@@ -3,11 +3,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import com.kim.pms.dao.AdminDao;
 import com.kim.pms.domain.Admin1;
 import com.kim.util.Prompt;
 
 public class AdminUpdate implements Command {
 
+  AdminDao adminDao;
+
+  public AdminUpdate(AdminDao adminDao) {
+    this.adminDao = adminDao;
+  }
 
   @Override
   public void service() throws Exception {

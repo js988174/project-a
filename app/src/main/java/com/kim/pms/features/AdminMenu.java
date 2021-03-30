@@ -1,14 +1,19 @@
 package com.kim.pms.features;
+import com.kim.pms.dao.AdminDao;
 import com.kim.util.Prompt;
 
 public class AdminMenu implements Command{
 
+  AdminDao adminDao;
 
+  public AdminMenu(AdminDao adminDao) {
+    this.adminDao = adminDao;
+  }
 
-  AdminList adminList1 = new AdminList();
-  AdminDetail adminDetail = new AdminDetail();
-  AdminUpdate adminUpdate = new AdminUpdate();
-  AdminDelete adminDelete = new AdminDelete();
+  AdminList adminList1 = new AdminList(adminDao);
+  AdminDetail adminDetail = new AdminDetail(adminDao);
+  AdminUpdate adminUpdate = new AdminUpdate(adminDao);
+  AdminDelete adminDelete = new AdminDelete(adminDao);
 
   @Override
   public void service() throws Exception {

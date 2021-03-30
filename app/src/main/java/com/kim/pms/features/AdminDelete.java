@@ -1,11 +1,14 @@
 package com.kim.pms.features;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import com.kim.pms.dao.AdminDao;
 import com.kim.util.Prompt;
 
 public class AdminDelete implements Command {
 
+  AdminDao adminDao;
+
+  public AdminDelete(AdminDao adminDao) {
+    this.adminDao = adminDao;
+  }
 
   @Override
   public void service() throws Exception{
@@ -21,21 +24,15 @@ public class AdminDelete implements Command {
       return;
     }
 
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/myproject?user=root&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "delete from kim_admin where id=?")) {
 
-      stmt.setString(1, id); 
-      if (stmt.executeUpdate() == 0) {
-        System.out.println("해당 ID의 회원이 없습니다.");
-      } else {
-        System.out.println("회원을 삭제하엿습니다.");
-      }
+    if (adminDao.delete(id) == 0) {
+      System.out.println("해당 ID의 회원이 없습니다.");
+    } else {
+      System.out.println("회원을 삭제하엿습니다.");
     }
   }
-
 }
+
 
 
 
