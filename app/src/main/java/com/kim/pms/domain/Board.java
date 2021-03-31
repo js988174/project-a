@@ -8,7 +8,7 @@ public class Board  {
   private int no;
   private String title;
   private String content;
-  private String writer;
+  private Admin1 writer;
   private Date now;
   private int viewCount;
   private int like;
@@ -36,10 +36,10 @@ public class Board  {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getWriter() {
+  public Admin1 getWriter() {
     return writer;
   }
-  public void setWriter(String writer) {
+  public void setWriter(Admin1 writer) {
     this.writer = writer;
   }
   public Date getNow() {

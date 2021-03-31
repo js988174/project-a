@@ -1,18 +1,17 @@
 package com.kim.pms.features;
 
-import java.util.List;
+import com.kim.pms.dao.ExistingDao;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
 
 
-public class ExistingPt  extends AbstractExistingHandler{
+public class ExistingPt implements Command{
 
+  ExistingDao existDao;
 
-  public ExistingPt(List<Existing> existList) {
-    super(existList);
-
+  public ExistingPt(ExistingDao existDao) {
+    this.existDao = existDao;
   }
-
 
   @Override
   public void service() {

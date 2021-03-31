@@ -1,18 +1,18 @@
 package com.kim.pms.features;
 
-import java.util.List;
 import java.util.Random;
+import com.kim.pms.dao.ExistingDao;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
 
 
-public class ExistingRocker extends AbstractExistingHandler {
+public class ExistingRocker implements Command {
 
+  ExistingDao existDao;
 
-  public ExistingRocker(List<Existing> existList) {
-    super(existList);
+  public ExistingRocker(ExistingDao existDao) {
+    this.existDao = existDao;
   }
-
 
   @Override
   public void service() {

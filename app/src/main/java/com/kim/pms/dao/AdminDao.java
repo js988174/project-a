@@ -57,7 +57,7 @@ public class AdminDao {
     try (PreparedStatement stmt = con.prepareStatement(
         "select * from kim_admin where id=?")) {
 
-      stmt.setString(1, id);
+      stmt.setString(1, Id);
 
       try (ResultSet rs = stmt.executeQuery()) {
         if (!rs.next()) {  
@@ -72,7 +72,7 @@ public class AdminDao {
         admin.setGender(rs.getString("gender"));
         admin.setAddress(rs.getString("address"));
         admin.setNow(rs.getDate("now"));
-        admin.setStatus(Admin1.getStatusLabel(rs.getInt("status")));
+        admin.setStatus(rs.getInt("status"));
 
         return admin;
       }
@@ -116,7 +116,7 @@ public class AdminDao {
       admin.setGender(rs.getString("gender"));
       admin.setAddress(rs.getString("address"));
       admin.setNow(rs.getDate("now"));
-      admin.setStatus(Admin1.getStatusLabel(rs.getInt("status")));
+      admin.setStatus(rs.getInt("status"));
 
       return admin;
     }

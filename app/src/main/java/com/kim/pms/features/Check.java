@@ -4,21 +4,23 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
+import com.kim.pms.dao.CheckDao;
 import com.kim.pms.domain.Check1;
 import com.kim.util.Prompt;
 
-public class Check extends AbstractCheckHandler {
+public class Check implements Command {
   // 출석 체크를 하면 회원 이름과 시간 락커룸 신청 (랜덤 중복 안되게)  언제 왔는지 나타나게 하기
 
 
-  private AdminValidator adminValidator;
+  AdminValidator adminValidator;
+  CheckDao checkDao;
 
-  public Check(List<Check1> checkList, AdminValidator adminValidator) {
-    super(checkList);
+  public Check (CheckDao checkDao,AdminValidator adminValidator) {
+    this.checkDao = checkDao;
     this.adminValidator = adminValidator;
   }
 
+  @Override
   public void service() {
     Check1 c = new Check1();
     while (true) {

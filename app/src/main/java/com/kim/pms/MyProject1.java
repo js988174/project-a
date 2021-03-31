@@ -4,6 +4,10 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import com.kim.pms.dao.AdminDao;
+import com.kim.pms.dao.BoardDao;
+import com.kim.pms.dao.CheckDao;
+import com.kim.pms.dao.ExistingDao;
 import com.kim.pms.features.AdminAdd;
 import com.kim.pms.features.AdminMenu;
 import com.kim.pms.features.AdminValidator;
@@ -44,15 +48,20 @@ public class MyProject1 {
 
   public void execute() throws Exception{
 
+    AdminDao adminDao = new AdminDao();
+    BoardDao boardDao = new BoardDao();
+    ExistingDao existDao = new ExistingDao();
+    CheckDao checkDao = new CheckDao();
+
     HashMap<String,Command> commandMap = new HashMap<>();
 
-    AdminValidator adminValidator = new AdminValidator();
+    AdminValidator adminValidator = new AdminValidator(adminDao);
 
-    commandMap.put("1", new AdminAdd());
-    commandMap.put("2", new ExistingMenu( adminValidator));
-    commandMap.put("3", new Check(adminValidator));
-    commandMap.put("4", new BoardMenu());
-    commandMap.put("5", new AdminMenu());
+    commandMap.put("1", new AdminAdd(adminDao));
+    commandMap.put("2", new ExistingMenu(existDao ,adminValidator));
+    commandMap.put("3", new Check(checkDao,adminValidator));
+    commandMap.put("4", new BoardMenu(boardDao));
+    commandMap.put("5", new AdminMenu(adminDao));
 
 
     try {

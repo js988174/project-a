@@ -1,17 +1,18 @@
 package com.kim.pms.features;
 
-import java.util.List;
+import com.kim.pms.dao.ExistingDao;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
 
 
-public class ExistingMenu extends AbstractExistingHandler{
+public class ExistingMenu implements Command{
 
 
-  private AdminValidator adminValidator;
+  AdminValidator adminValidator;
+  ExistingDao existDao;
 
-  public ExistingMenu(List<Existing> existList ,AdminValidator adminValidator) {
-    super(existList);
+  public ExistingMenu(ExistingDao existDao ,AdminValidator adminValidator) {
+    this.existDao = existDao;
     this.adminValidator = adminValidator;
   }
 
