@@ -58,7 +58,7 @@ public class MyProject1 {
     AdminValidator adminValidator = new AdminValidator(adminDao);
 
     commandMap.put("1", new AdminAdd(adminDao));
-    commandMap.put("2", new ExistingMenu(existDao ,adminValidator));
+    commandMap.put("2", new ExistingMenu(existDao ,adminValidator, adminDao));
     commandMap.put("3", new Check(checkDao,adminValidator));
     commandMap.put("4", new BoardMenu(boardDao));
     commandMap.put("5", new AdminMenu(adminDao));
@@ -94,7 +94,7 @@ public class MyProject1 {
               break;
             case "6" :
               System.out.println("시스템을 종료합니다. ");
-              break loop;
+              return;
 
             default :
               Command commandHandler = commandMap.get(command);

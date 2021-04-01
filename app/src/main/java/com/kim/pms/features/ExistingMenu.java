@@ -1,5 +1,6 @@
 package com.kim.pms.features;
 
+import com.kim.pms.dao.AdminDao;
 import com.kim.pms.dao.ExistingDao;
 import com.kim.pms.domain.Existing;
 import com.kim.util.Prompt;
@@ -10,19 +11,21 @@ public class ExistingMenu implements Command{
 
   AdminValidator adminValidator;
   ExistingDao existDao;
+  AdminDao adminDao;
 
-  public ExistingMenu(ExistingDao existDao ,AdminValidator adminValidator) {
+  public ExistingMenu(ExistingDao existDao ,AdminValidator adminValidator, AdminDao adminDao) {
     this.existDao = existDao;
     this.adminValidator = adminValidator;
+    this.adminDao = adminDao;
   }
 
 
-  ExistingList existList1 = new ExistingList(existList);
-  ExistingPt existPt = new ExistingPt(existList);
-  ExistingRocker existRocker = new ExistingRocker(existList);
+  ExistingList existList1 = new ExistingList(existDao, adminValidator, adminDao);
+  ExistingPt existPt = new ExistingPt(existDao);
+  ExistingRocker existRocker = new ExistingRocker(existDao);
 
   @Override
-  public void service() {
+  public void service() throws Exception {
     System.out.println();
     System.out.println("[기존 회원]");
 

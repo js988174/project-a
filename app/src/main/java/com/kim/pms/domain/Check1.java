@@ -1,41 +1,26 @@
 package com.kim.pms.domain;
 
+import java.sql.Date;
+
 public class Check1 {
-  private String ID1;
+  private Admin1 ID1;
+  private Date registerDate;
 
-  public Check1 () {} 
 
-  public Check1(String csv) {
-    String[] fields = csv.split(","); 
-    this.setID1(fields[0]);
-  }
-
-  public String toCsvString() {
-    return String.format("%s",
-        this.getID1());
-  }
-
-  public static Check1 valueOfCsv(String csv) {
-    String[] fields = csv.split(","); 
-    Check1 c = new Check1();
-    c.setID1(fields[0]);
-    return c;
-  }
-
-  public String getID1() {
+  public Admin1 getID1() {
     return ID1;
   }
 
-  public void setID1(String iD1) {
-    ID1 = iD1;
+  public void setID1(Admin1 admin1) {
+    ID1 = admin1;
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((ID1 == null) ? 0 : ID1.hashCode());
-    return result;
+  public Date getRegisterDate() {
+    return registerDate;
+  }
+
+  public void setRegisterDate(Date registerDate) {
+    this.registerDate = registerDate;
   }
 
   @Override

@@ -21,8 +21,10 @@ public class Check implements Command {
   }
 
   @Override
-  public void service() {
+  public void service() throws Exception {
+
     Check1 c = new Check1();
+
     while (true) {
       System.out.println();
       System.out.println("===========출석 체크=============");
@@ -54,7 +56,7 @@ public class Check implements Command {
         System.out.println();
         System.out.println("\t" + "\t" + "[회원 출석 정보]");
         int year = 2021;
-        int month = 3;
+        int month = 4;
         System.out.println( "\t" + "\t" + "[ " + year +  " 년 " + month + "월" + "  ]" );
         System.out.println("-------------------------------------------------------");
         System.out.println("월\t화\t수\t목\t금\t토\t일");

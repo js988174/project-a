@@ -53,6 +53,7 @@ public class AdminDao {
     return list;
   }
 
+
   public Admin1 findById(String Id) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select * from kim_admin where id=?")) {
@@ -78,6 +79,8 @@ public class AdminDao {
       }
     }
   }
+
+
   public int update(Admin1 admin) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update kim_admin set id=id(?),name=?,address=?,phone=? where id=?")) {
