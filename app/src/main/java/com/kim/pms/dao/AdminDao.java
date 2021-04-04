@@ -19,7 +19,7 @@ public class AdminDao {
 
   public int insert(Admin1 admin) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into kim_admin(id, name , phone, address, birth, gender, status) values(id(?),?,?,?,?,?,?");) {
+        "insert into kim_admin(id,name,phone,address,birth,gender,status) values(id(?),?,?,?,?,?,?");) {
 
       stmt.setString(1, admin.getId());
       stmt.setString(2, admin.getName());
