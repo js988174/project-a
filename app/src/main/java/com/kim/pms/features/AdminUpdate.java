@@ -19,13 +19,14 @@ public class AdminUpdate implements Command {
 
     String id = Prompt.inputString("ID: ");
 
-    Admin1 admin = adminDao.findById(id);  
+    Admin1 oldAdmin = adminDao.findById(id);  
 
-    if (admin == null) {
+    if (oldAdmin == null) {
       System.out.println("해당 ID의 회원이 없습니다.");
       return;
     }
-
+    Admin1 admin = new Admin1();
+    admin.setNo(oldAdmin.getNo());
     admin.setId(Prompt.inputString("new ID:"));
     admin.setName(Prompt.inputString(String.format("이름(%s): ", admin.getName())));
     admin.setAddress(Prompt.inputString(String.format("변경 하실 주소(%s): ", admin.getAddress())));

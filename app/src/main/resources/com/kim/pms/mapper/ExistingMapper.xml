@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExistingMapper">
+  
+  <resultMap id="existMap" type="exist">
+    <id column="no" property="no"/>
+    <result column="pt" property="pt"/>
+    <result column="r_room" property="r_room"/>
+    <result column="r_number" property="r_number"/>
+ 
+  </resultMap>
+  
+  <insert id="insert" parameterType="exist">
+    insert into pms_exist(pt,r_room,r_number) 
+    values(#{pt}, #{r_room}, #{r_number})
+  </insert>
+  
+  <select id="findAll" resultMap="boardMap">
+    select
+      no,
+      pt,
+      r_room,
+      r_number    
+    from pms_exist
+    order by b.no desc
+  </select>
+  
+
+  
+</mapper>
+
+
+
+
+
+
+

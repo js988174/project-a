@@ -1,13 +1,22 @@
 package com.kim.pms;
 
+import java.io.InputStream;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.google.common.io.Resources;
 import com.kim.pms.dao.AdminDao;
 import com.kim.pms.dao.BoardDao;
 import com.kim.pms.dao.CheckDao;
 import com.kim.pms.dao.ExistingDao;
+import com.kim.pms.dao.mariadb.AdminDaoImpl;
+import com.kim.pms.dao.mariadb.BoardDaoImpl;
+import com.kim.pms.dao.mariadb.CheckDaoImpl;
+import com.kim.pms.dao.mariadb.ExistingDaoImpl;
 import com.kim.pms.features.AdminAdd;
 import com.kim.pms.features.AdminMenu;
 import com.kim.pms.features.AdminValidator;
@@ -48,10 +57,18 @@ public class MyProject1 {
 
   public void execute() throws Exception{
 
-    AdminDao adminDao = new AdminDao();
-    BoardDao boardDao = new BoardDao();
-    ExistingDao existDao = new ExistingDao();
-    CheckDao checkDao = new CheckDao();
+    InputStream mybatisConfigStream = Resources.getResourceAsStream(
+        "com/kim/pms/conf/mybatis-config.xml");
+
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfigStream);
+
+
+    SqlSession sqlSession = sqlSessionFactory.openSession(false);
+
+    AdminDao adminDao = new AdminDaoImpl(sqlSession);
+    BoardDao boardDao = new BoardDaoImpl(sqlSession);
+    ExistingDao existDao = new ExistingDaoImpl(sqlSession);
+    CheckDao checkDao = new CheckDaoImpl(sqlSession);
 
     HashMap<String,Command> commandMap = new HashMap<>();
 

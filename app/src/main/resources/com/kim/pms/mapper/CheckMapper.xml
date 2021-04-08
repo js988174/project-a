@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BoardMapper">
+<mapper namespace="CheckMapper">
   
-  <resultMap id="boardMap" type="board">
+  <resultMap id="checkMap" type="check">
     <id column="no" property="no"/>
     <result column="title" property="title"/>
     <result column="content" property="content"/>
@@ -13,17 +13,31 @@
     <result column="vw_cnt" property="viewCount"/>
     <result column="like_cnt" property="like"/>
     
-    <association property="writer" javaType="board">
+    <association property="writer" javaType="com.kim.pms.domain.Admin">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
     </association>
     
   </resultMap>
   
-  <insert id="insert" parameterType="board">
+  <insert id="insert" parameterType="com.kim.pms.domain.Board">
     insert into pms_board(title, content, writer) 
     values(#{title}, #{content}, #{writer.no})
   </insert>
+  
+  <select id="findAll" resultMap="boardMap">
+    select
+      b.no,
+      b.title,
+      b.cdt,
+      b.vw_cnt,
+      b.like_cnt,
+      a.no as writer_no,
+      a.name as writer_name
+    from kim_board b
+      inner join kim_member a on a.no=b.writer
+    order by b.no desc
+  </select>
   
   <select id="findByKeyword" resultMap="boardMap" parameterType="string">
     select
@@ -34,14 +48,12 @@
       b.like_cnt,
       a.no as writer_no,
       a.name as writer_name
-    from pms_board b
-      inner join pms_member a on a.no=b.writer
-      <if test="value != null"> 
+    from kim_board b
+      inner join kim_member a on a.no=b.writer
     where 
       b.title like concat('%', #{value},'%')
       or b.content like concat('%', #{value},'%')
       or a.name like concat('%', #{value},'%')
-      </if>
     order by b.no desc
   </select>
   
@@ -55,26 +67,26 @@
       b.like_cnt,
       a.no as writer_no,
       a.name as writer_name
-    from pms_board b
-      inner join pms_member a on a.no=b.writer
+    from kim_board b
+      inner join kim_member a on a.no=b.writer
     where b.no = #{value}
   </select>
   
-  <update id="update" parameterType="board">
-    update pms_board set
+  <update id="update" parameterType="com.kim.pms.domain.Board">
+    update kim_board set
         title = #{title}, 
         content = #{content}
     where no = #{no}
   </update>
   
   <update id="updateViewCount" parameterType="int">
-    update pms_board set 
+    update kim_board set 
       vw_cnt = vw_cnt + 1 
     where no = #{value}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pms_board 
+    delete from kim_board 
     where no = #{value}
   </delete>
 

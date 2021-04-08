@@ -1,9 +1,5 @@
 package com.kim.pms.features;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.kim.pms.dao.AdminDao;
@@ -19,30 +15,33 @@ public class AdminValidator {
   }
 
   public Admin1 inputMember(String promptTitle) throws Exception {
-
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/myproject?user=root&password=1111");
-        PreparedStatement stmt = con.prepareStatement(
-            "select id,name from kim_admin where id=?")) {
-
-
-      while (true) {
-        String id = Prompt.inputString(promptTitle);
-        if (id.length() == 0) {
-          return null;
-        }
-        stmt.setString(1, id);
-        try (ResultSet rs = stmt.executeQuery()) {
-          if (rs.next()) {
-            Admin1 admin = new Admin1();
-            admin.setId(rs.getString("id"));
-            admin.setName(rs.getString("name"));
-            return admin;
-          }
-          System.out.println("등록된 회원이 아닙니다.");
-          System.out.println();
-        }
+    while (true) {
+      String id = Prompt.inputString(promptTitle);
+      if (id.length() == 0) {
+        return null;
       }
+      Admin1 m = adminDao.findById(id);
+      if (m != null) {
+        return m;
+      }
+      System.out.println("등록된 회원이 아닙니다.");
+      System.out.println();
+    }
+  }
+
+  public Admin1 inputMember1(String promptTitle) throws Exception {
+    while (true) {
+      String name = Prompt.inputString(promptTitle);
+      if (name.length() == 0) {
+        return null;
+      }
+
+      Admin1 m = adminDao.findByName(name);
+      if (m != null) {
+        return m;
+      }
+      System.out.println("등록된 회원이 아닙니다.");
+      System.out.println();
     }
   }
 

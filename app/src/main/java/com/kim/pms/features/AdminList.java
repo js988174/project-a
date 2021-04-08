@@ -18,7 +18,8 @@ public class AdminList implements Command {
     for (Admin1 m : list) {
       System.out.println("=====================================================================================");
       System.out.println("[회원 목록]");
-      System.out.printf("%s, %s, %s, %s, %s, %s\n",
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n",
+          m.getNo(),
           m.getId(),
           m.getName(),
           m.getPhone(),

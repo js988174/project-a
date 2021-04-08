@@ -2,7 +2,7 @@ package com.kim.pms.domain;
 
 public class Existing {
 
-
+  private int no;
   private Admin1 ID1;
   private int status1;
   private String number;
@@ -10,8 +10,8 @@ public class Existing {
 
   @Override
   public String toString() {
-    return "Existing [ID1=" + ID1 + ", status1=" + status1 + ", number=" + number + ", status2="
-        + status2 + "]";
+    return "Existing [no=" + no + ", ID1=" + ID1 + ", status1=" + status1 + ", number=" + number
+        + ", status2=" + status2 + "]";
   }
 
   public Admin1 getID1() {
@@ -44,6 +44,14 @@ public class Existing {
 
   public void setStatus2(String status2) {
     this.status2 = status2;
+  }
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
   }
 
   public static String getStatus(int status) {

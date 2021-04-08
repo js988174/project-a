@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMapper">
+  
+  <resultMap id="adminMap" type="admin">
+    <id column="no" property="no"/>
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="phone" property="phone"/>
+    <result column="address" property="address"/>
+    <result column="birth" property="birth"/>
+    <result column="gender" property="gender"/>
+    <result column="status" property="status"/>
+    
+  </resultMap>
+  
+  <insert id="insert" parameterType="admin">
+    insert into kim_admin(id,name,phone,address,birth,gender,status) 
+    values(#{id}, #{name}, #{phone}, #{address}, #{birth}, #{gender}, #{status})
+     
+  </insert>
+  
+  <select id="findAll" resultMap="adminMap">
+    select
+      no,
+      id,
+      name,
+      phone,
+      address,
+      birth,
+      gender,
+      status
+    from pms_admin
+     order by name asc
+  </select>
+  
+  <select id="findByName" resultMap="adminMap" parameterType="string">
+    select
+      no,
+      id,
+      name,
+      phone,
+      address,
+      birth,
+      gender,
+      status
+    from pms_admin
+    where name = #{value}
+    order by name asc
+  </select>
+  
+  <select id="findByNo" resultMap="adminMap" parameterType="int">
+    select
+      no,
+      id,
+      name,
+      phone,
+      address,
+      birth,
+      gender,
+      status
+    from pms_admin
+    where no = #{value}
+  </select>
+  
+  <select id="findById" resultMap="adminMap" parameterType="string">
+    select
+      no,
+      id,
+      name,
+      phone,
+      address,
+      birth,
+      gender,
+      status
+    from pms_admin
+    where id = #{value}
+    order by name asc
+  </select>
+  
+  <update id="update" parameterType="admin">
+    update pms_member 
+    <set>
+      <if test="id != ''">id=#{id},</if>
+       <if test="name != ''">name=#{name},</if>
+        <if test="address != ''">address=#{address},</if>
+         <if test="phone != ''">phone=#{phone},</if>
+        </set>
+    where id = #{value}
+  </update>
+ 
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_admin
+    where id = #{value}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+

@@ -38,7 +38,8 @@ public class ExistingList implements Command {
       return;
     }
 
-    System.out.printf("PT: %s", Existing.getStatus(e.getStatus1()));
+    System.out.printf("번호: %d\n", e.getNo());
+    System.out.printf("PT: %s\n", Existing.getStatus(e.getStatus1()));
     System.out.printf("락커룸 한달 신청: %s ,락커룸 번호: %d\n", e.getStatus2(), e.getNumber());
     System.out.println();
 

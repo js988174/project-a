@@ -18,6 +18,6 @@ public interface AdminDao {
 
   Admin1 findByName(String name) throws Exception;
 
-
+  Admin1 findByNo(int no) throws Exception;
 
 }
